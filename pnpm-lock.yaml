@@ -1,0 +1,16 @@
+importers:
+  .:
+    dependencies:
+      rome: 10.0.4-beta
+    specifiers:
+      rome: ^10.0.4-beta
+lockfileVersion: 5.2
+packages:
+  /rome/10.0.4-beta:
+    dev: false
+    engines:
+      node: '>=12.8.1'
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-wDD/ZdImSt7Cg1/u3TxIBjIs56tEhPmXV/Rry1nExV+RogaLaF1IXTUbYNXDFzXBk9fEg+gnBovkY4WN/f41WQ==
