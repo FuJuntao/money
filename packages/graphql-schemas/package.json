@@ -1,0 +1,16 @@
+{
+  "name": "graphql-schemas",
+  "version": "0.0.1",
+  "dependencies": {
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/typescript": "^1.20.2",
+    "@graphql-codegen/typescript-resolvers": "^1.18.1",
+    "@graphql-tools/graphql-file-loader": "^6.2.7",
+    "@graphql-tools/load": "^6.2.5",
+    "graphql": "^15.5.0",
+    "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "generate-graphql-types": "graphql-codegen --config codegen.yml"
+  }
+}
