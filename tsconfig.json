@@ -2,6 +2,7 @@
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
+    "lib": ["ESNext"],
     "module": "ESNext",
     "moduleResolution": "node",
     "skipLibCheck": true,

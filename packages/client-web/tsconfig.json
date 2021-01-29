@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "include": ["src", "types"],
   "compilerOptions": {
+    "lib": ["DOM"],
     "target": "esnext",
     "jsx": "preserve",
     "baseUrl": "./",
