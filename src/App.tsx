@@ -1,11 +1,12 @@
-import type { Resolvers } from '@money/graphql-schemas/lib/generated_graphql_types';
-import { schema } from '@money/graphql-schemas/lib/schema';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import { graphql } from 'graphql';
 import React, { useEffect, useState } from 'react';
+import type { Resolvers } from './graphql-schemas/generated_graphql_types';
+import rawSchema from './graphql-schemas/schema.graphql';
 
 interface AppProps {}
 
-const rootValue: Resolvers = {
+const resolvers: Resolvers<{}> = {
   Query: {
     hello: () => {
       return 'Hello world!';
@@ -13,7 +14,9 @@ const rootValue: Resolvers = {
   },
 };
 
-function App({}: AppProps) {
+const schema = makeExecutableSchema({ typeDefs: rawSchema, resolvers });
+
+function App(props: AppProps) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -25,7 +28,6 @@ function App({}: AppProps) {
     async function query() {
       const result = await graphql({
         schema,
-        rootValue,
         source: '{ hello }',
       });
       console.log('file: App.tsx ~ line 28 ~ query ~ result', result);
