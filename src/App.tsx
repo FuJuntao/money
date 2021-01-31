@@ -3,20 +3,21 @@ import { graphql } from 'graphql';
 import React, { useEffect, useState } from 'react';
 import type { Resolvers } from './graphql-schemas/generated_graphql_types';
 import rawSchema from './graphql-schemas/schema.graphql';
+import type { GraphqlContextType } from './graphql-schemas/types';
 
-interface AppProps {}
-
-const resolvers: Resolvers<{}> = {
+const resolvers: Resolvers<GraphqlContextType> = {
   Query: {
-    hello: () => {
-      return 'Hello world!';
-    },
+    hello: () => 'hello',
   },
 };
 
-const schema = makeExecutableSchema({ typeDefs: rawSchema, resolvers });
+const schema = makeExecutableSchema<GraphqlContextType>({
+  typeDefs: rawSchema,
+  resolvers,
+  allowUndefinedInResolve: false,
+});
 
-function App(props: AppProps) {
+function App() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {

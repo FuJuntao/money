@@ -1,9 +1,0 @@
-// For configuration documentation see http://romefrontend.dev/#project-configuration
-name: "money"
-lint: {
-	ignore: [
-		"node_modules"
-		".history"
-]
-}
-root: true

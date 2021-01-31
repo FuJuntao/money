@@ -7,3 +7,4 @@ generates:
       - typescript-resolvers
     config:
       useTypeImports: true
+      contextType: ./types#GraphqlContextType
