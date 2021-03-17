@@ -56,9 +56,8 @@ declare module '*.png' {
   export default ref;
 }
 
+/* CUSTOM: ADD YOUR OWN HERE */
 declare module '*.graphql' {
   const ref: string;
   export default ref;
 }
-
-/* CUSTOM: ADD YOUR OWN HERE */
