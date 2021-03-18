@@ -15,6 +15,7 @@ importers:
       '@snowpack/plugin-typescript': 1.2.1_typescript@4.2.3
       '@snowpack/web-test-runner-plugin': 0.2.1_c731611d21747adab599b93c8a058086
       '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
+      '@types/chai-dom': 0.0.10
       '@types/mocha': 8.2.1
       '@types/react': 17.0.3
       '@types/react-dom': 17.0.2
@@ -24,6 +25,7 @@ importers:
       '@web/test-runner': 0.12.17
       babel-eslint: 10.1.0_eslint@7.22.0
       chai: /@esm-bundle/chai/4.3.4
+      chai-dom: 1.9.0_chai@4.3.4+mocha@8.3.2
       eslint: 7.22.0
       eslint-config-prettier: 8.1.0_eslint@7.22.0
       eslint-config-react-app: 6.0.0_828f2d5364d1d27245a2a80409233a43
@@ -49,6 +51,7 @@ importers:
       '@snowpack/plugin-typescript': ^1.2.1
       '@snowpack/web-test-runner-plugin': ^0.2.1
       '@testing-library/react': ^11.2.5
+      '@types/chai-dom': ^0.0.10
       '@types/mocha': ^8.2.1
       '@types/react': ^17.0.3
       '@types/react-dom': ^17.0.2
@@ -58,6 +61,7 @@ importers:
       '@web/test-runner': ^0.12.17
       babel-eslint: ^10.1.0
       chai: npm:@esm-bundle/chai@^4.3.4
+      chai-dom: ^1.9.0
       eslint: ^7.22.0
       eslint-config-prettier: ^8.1.0
       eslint-config-react-app: ^6.0.0
@@ -2646,6 +2650,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-W98JrE0j2K78swW4ukqMleo8R7h/pFETjM2DQ90MF6XK2i4LO4W3gQ71Lt4w3bfm2EvVSyWHplECvB5sK22yFQ==
+  /@types/chai-dom/0.0.10:
+    dependencies:
+      '@types/chai': 4.2.15
+    dev: true
+    resolution:
+      integrity: sha512-C5M5ht5visUd0fEB+drAL4IoqhPZnF9Ts9N+FnRU+IdxHHNGzeqquEtdhZAjLi0t4uzKnqS5lU2SuTwG9d6+8w==
   /@types/chai/4.2.14:
     dev: true
     resolution:
@@ -4096,6 +4106,18 @@ packages:
       node: 6.* || 8.* || >= 10.*
     resolution:
       integrity: sha512-PiT/hQmTonHhl/HFGN+Lx3JJUznrVYJ3+AQsnthneZbvW7x+f08Tk7yLJTLEOUvBTbduLeeBkxEaYXUOUrRq6g==
+  /chai-dom/1.9.0_chai@4.3.4+mocha@8.3.2:
+    dependencies:
+      chai: /@esm-bundle/chai/4.3.4
+      mocha: 8.3.2
+    dev: true
+    engines:
+      node: '>= 0.12.0'
+    peerDependencies:
+      chai: '>= 3'
+      mocha: '>= 2'
+    resolution:
+      integrity: sha512-UXSbhcGVBWv/5qVqbJY/giTDRyo3wKapUsWluEuVvxcJLFXkyf8l4D2PTd6trzrmca6WWnGdpaFkYdl1P0WjtA==
   /chai/4.2.0:
     dependencies:
       assertion-error: 1.1.0
