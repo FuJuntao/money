@@ -1,1 +1,3 @@
-export type GraphqlContextType = undefined;
+import type Dexie from 'dexie';
+
+export type GraphqlContextType = Dexie;

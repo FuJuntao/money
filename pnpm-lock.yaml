@@ -1,6 +1,7 @@
 importers:
   .:
     dependencies:
+      dexie: 3.1.0-alpha.9
       graphql: 15.5.0
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
@@ -62,6 +63,7 @@ importers:
       babel-eslint: ^10.1.0
       chai: npm:@esm-bundle/chai@^4.3.4
       chai-dom: ^1.9.0
+      dexie: ^3.1.0-alpha.9
       eslint: ^7.22.0
       eslint-config-prettier: ^8.1.0
       eslint-config-react-app: ^6.0.0
@@ -4851,6 +4853,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-AD1hi7iVJ8OD0aMLQU5VK0XH9LDlA1+BcPIgrAxPfaibx2DbWucuyOhc4oyQCbnvDDO68nN6/LcKfqTP343Jjg==
+  /dexie/3.1.0-alpha.9:
+    dev: false
+    engines:
+      node: '>=6.0'
+    resolution:
+      integrity: sha512-H4cqgKTtdw23/3f+HjxqrmidfytHAWjOFwcpy9z6fYQZI/DM6Keo0nRGGNPokHIElYeShS8TOUkVLoZoLSAhCw==
   /dicer/0.3.0:
     dependencies:
       streamsearch: 0.1.2

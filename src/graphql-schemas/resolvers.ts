@@ -3,6 +3,11 @@ import type { GraphqlContextType } from './types';
 
 export const resolvers: Resolvers<GraphqlContextType> = {
   Query: {
-    hello: () => 'hello',
+    accounts: async (_parent, _args, context) => {
+      return await context.table('accounts').toArray();
+    },
+    transactions: async (_parent, _args, context) => {
+      return await context.table('transactions').toArray();
+    },
   },
 };

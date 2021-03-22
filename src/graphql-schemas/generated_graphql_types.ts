@@ -13,14 +13,24 @@ export type Scalars = {
   Float: number;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  hello?: Maybe<Scalars['String']>;
+export type Account = {
+  __typename?: 'Account';
+  id: Scalars['Int'];
+  name: Scalars['String'];
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  sayHello?: Maybe<Scalars['String']>;
+export type Transaction = {
+  __typename?: 'Transaction';
+  id: Scalars['Int'];
+  from?: Maybe<Scalars['Int']>;
+  to?: Maybe<Scalars['Int']>;
+  amount: Scalars['Int'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  accounts: Array<Maybe<Account>>;
+  transactions: Array<Maybe<Transaction>>;
 };
 
 
@@ -101,31 +111,47 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Query: ResolverTypeWrapper<{}>;
+  Account: ResolverTypeWrapper<Account>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  Mutation: ResolverTypeWrapper<{}>;
+  Transaction: ResolverTypeWrapper<Transaction>;
+  Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Query: {};
+  Account: Account;
+  Int: Scalars['Int'];
   String: Scalars['String'];
-  Mutation: {};
+  Transaction: Transaction;
+  Query: {};
   Boolean: Scalars['Boolean'];
 };
 
-export type QueryResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type AccountResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MutationResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  sayHello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type TransactionResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Transaction'] = ResolversParentTypes['Transaction']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  from?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  to?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  amount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type QueryResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  accounts?: Resolver<Array<Maybe<ResolversTypes['Account']>>, ParentType, ContextType>;
+  transactions?: Resolver<Array<Maybe<ResolversTypes['Transaction']>>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = GraphqlContextType> = {
+  Account?: AccountResolvers<ContextType>;
+  Transaction?: TransactionResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Mutation?: MutationResolvers<ContextType>;
 };
 
 

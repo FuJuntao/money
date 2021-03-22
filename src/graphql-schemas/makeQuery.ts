@@ -1,5 +1,6 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { graphql, GraphQLArgs } from 'graphql';
+import { initializeDatabase } from '../database/initializeDatabase';
 import { resolvers } from './resolvers';
 import rawSchema from './schema.graphql';
 import type { GraphqlContextType } from './types';
@@ -10,8 +11,16 @@ const schema = makeExecutableSchema<GraphqlContextType>({
   allowUndefinedInResolve: false,
 });
 
-export const makeQuery = (source: GraphQLArgs['source']) =>
-  graphql({
+async function getContextValue(): Promise<GraphqlContextType> {
+  return initializeDatabase();
+}
+
+export const makeQuery = async (source: GraphQLArgs['source']) => {
+  const contextValue = await getContextValue();
+
+  return graphql({
     schema,
     source,
+    contextValue,
   });
+};
