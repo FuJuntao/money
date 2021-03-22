@@ -1,5 +1,5 @@
-import type { Resolvers } from './generated_graphql_types';
-import type { GraphqlContextType } from './types';
+import type { Resolvers } from 'src/graphql-schemas/types';
+import type { GraphqlContextType } from './graphqlContext';
 
 export const resolvers: Resolvers<GraphqlContextType> = {
   Query: {

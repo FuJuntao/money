@@ -1,15 +1,7 @@
-import {
-  ChakraProvider,
-  Container,
-  Heading,
-  Heading,
-  Spinner,
-  Spinner,
-  Stack,
-} from '@chakra-ui/react';
+import { ChakraProvider, Heading, Spinner, Stack } from '@chakra-ui/react';
 import type { ExecutionResult } from 'graphql';
 import React, { useEffect, useState } from 'react';
-import { makeQuery } from './graphql-schemas/makeQuery';
+import { makeQuery } from './graphql/makeQuery';
 
 const useQuery = (source: string) => {
   const [loading, setLoading] = useState(true);
