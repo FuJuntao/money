@@ -5,6 +5,7 @@
     "start": "snowpack dev",
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "check": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "generate-graphql-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
