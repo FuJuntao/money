@@ -14,8 +14,8 @@
     "dexie": "^3.1.0-alpha.9",
     "framer-motion": "^4.0.0",
     "graphql": "^15.5.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.3",
@@ -31,10 +31,10 @@
     "@types/chai-dom": "^0.0.10",
     "@types/mocha": "^8.2.2",
     "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
+    "@types/react-dom": "^17.0.3",
     "@types/snowpack-env": "^2.3.3",
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
     "@web/test-runner": "^0.12.17",
     "babel-eslint": "^10.1.0",
     "chai": "npm:@esm-bundle/chai@^4.3.4",
