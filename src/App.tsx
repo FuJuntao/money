@@ -7,13 +7,14 @@ interface ResultData {
 }
 
 function App() {
-  const { data, loading } = useQuery<ResultData>('{ accounts { id name } }');
+  const { data, isLoading } = useQuery<ResultData>('{ accounts { id name } }');
 
   return (
     <ChakraProvider>
       <Heading as="h1">Hello</Heading>
+
       <Heading>Accounts</Heading>
-      {loading ? (
+      {isLoading ? (
         <Spinner />
       ) : (
         <Stack>

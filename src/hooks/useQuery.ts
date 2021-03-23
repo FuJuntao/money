@@ -1,27 +1,32 @@
+import { useBoolean } from '@chakra-ui/react';
 import type { ExecutionResult } from 'graphql';
 import { useEffect, useState } from 'react';
 import { makeQuery } from '../graphql/makeQuery';
 
 export const useQuery = <Result>(source: string) => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, { on: setIsLoading, off: setIsNotLoading }] = useBoolean(
+    true,
+  );
+
   const [result, setResult] = useState<null | ExecutionResult<Result>>(null);
 
   useEffect(() => {
     async function query() {
       try {
-        const result = await makeQuery<Result>(source);
+        setIsLoading();
+        const result = await makeQuery<Result>({ source });
         setResult(result);
       } finally {
-        setLoading(false);
+        setIsNotLoading();
       }
     }
 
     query();
-  }, [source]);
+  }, [setIsLoading, setIsNotLoading, source]);
 
   return {
     data: result?.data ?? null,
     errors: result?.errors ?? null,
-    loading,
+    isLoading,
   };
 };

@@ -10,12 +10,15 @@ const schema = makeExecutableSchema<GraphqlContextType>({
   allowUndefinedInResolve: false,
 });
 
-export const makeQuery = async <Result>(source: GraphQLArgs['source']) => {
+type Args = Pick<GraphQLArgs, 'source' | 'variableValues'>;
+
+export const makeQuery = async <Result>(args: Args) => {
   const contextValue = await getContextValue();
 
   return graphql({
     schema,
-    source,
+    source: args.source,
     contextValue,
+    variableValues: args.variableValues,
   }) as ExecutionResult<Result>;
 };
