@@ -8,14 +8,20 @@ interface ResultData {
 }
 
 function App() {
-  const { data, isLoading } = useQuery<ResultData>('{ accounts { id name } }');
+  const { query, data, isLoading } = useQuery<ResultData>(
+    '{ accounts { id name } }',
+  );
 
   return (
     <ChakraProvider>
       <Heading as="h1">Hello</Heading>
 
       <Heading>Accounts</Heading>
-      <AddAccount />
+      <AddAccount
+        onSuccess={() => {
+          query();
+        }}
+      />
       {isLoading ? (
         <Spinner />
       ) : (

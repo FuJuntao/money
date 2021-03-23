@@ -7,7 +7,7 @@ interface Options<Variables> {
   variables: Variables;
 }
 
-export const useMutation = <Result, Variables>(
+export const useMutation = <Result, Variables = unknown>(
   source: string,
   options?: Options<Variables>,
 ) => {
@@ -15,7 +15,7 @@ export const useMutation = <Result, Variables>(
   const [result, setResult] = useState<null | ExecutionResult<Result>>(null);
 
   const mutate = useCallback(
-    async (variables) => {
+    async (variables?: Variables) => {
       try {
         setIsLoading();
         const result = await makeQuery<Result>({
