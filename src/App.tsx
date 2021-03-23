@@ -1,38 +1,14 @@
-import { ChakraProvider, Heading, Spinner, Stack } from '@chakra-ui/react';
+import { ChakraProvider, Heading } from '@chakra-ui/react';
 import React from 'react';
-import AddAccount from './accounts/AddAccount';
-import { useQuery } from './hooks/useQuery';
-
-interface ResultData {
-  accounts: { id: string; name: string }[];
-}
+import AccountList from './accounts/AccountList';
+import { theme } from './theme';
 
 function App() {
-  const { query, data, isLoading } = useQuery<ResultData>(
-    '{ accounts { id name } }',
-  );
-
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Heading as="h1">Hello</Heading>
 
-      <Heading>Accounts</Heading>
-      <AddAccount
-        onSuccess={() => {
-          query();
-        }}
-      />
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <Stack>
-          {data?.accounts.map((account) => (
-            <Heading key={account.id} as="h3">
-              {account.name}
-            </Heading>
-          ))}
-        </Stack>
-      )}
+      <AccountList />
     </ChakraProvider>
   );
 }
