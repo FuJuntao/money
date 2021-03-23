@@ -1,5 +1,6 @@
 import { ChakraProvider, Heading, Spinner, Stack } from '@chakra-ui/react';
 import React from 'react';
+import AddAccount from './accounts/AddAccount';
 import { useQuery } from './hooks/useQuery';
 
 interface ResultData {
@@ -14,12 +15,15 @@ function App() {
       <Heading as="h1">Hello</Heading>
 
       <Heading>Accounts</Heading>
+      <AddAccount />
       {isLoading ? (
         <Spinner />
       ) : (
         <Stack>
           {data?.accounts.map((account) => (
-            <Heading as="h3">{account.name}</Heading>
+            <Heading key={account.id} as="h3">
+              {account.name}
+            </Heading>
           ))}
         </Stack>
       )}

@@ -14,3 +14,11 @@ type Query {
   accounts: [Account]!
   transactions: [Transaction]!
 }
+
+input AddAccountInput {
+  name: String!
+}
+
+type Mutation {
+  addAccount(input: AddAccountInput!): Account
+}

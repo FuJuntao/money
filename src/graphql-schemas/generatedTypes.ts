@@ -4,6 +4,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -31,6 +32,20 @@ export type Query = {
   __typename?: 'Query';
   accounts: Array<Maybe<Account>>;
   transactions: Array<Maybe<Transaction>>;
+};
+
+export type AddAccountInput = {
+  name: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addAccount?: Maybe<Account>;
+};
+
+
+export type MutationAddAccountArgs = {
+  input: AddAccountInput;
 };
 
 
@@ -116,6 +131,8 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Transaction: ResolverTypeWrapper<Transaction>;
   Query: ResolverTypeWrapper<{}>;
+  AddAccountInput: AddAccountInput;
+  Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
@@ -126,6 +143,8 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Transaction: Transaction;
   Query: {};
+  AddAccountInput: AddAccountInput;
+  Mutation: {};
   Boolean: Scalars['Boolean'];
 };
 
@@ -148,10 +167,15 @@ export type QueryResolvers<ContextType = GraphqlContextType, ParentType extends 
   transactions?: Resolver<Array<Maybe<ResolversTypes['Transaction']>>, ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addAccount?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationAddAccountArgs, 'input'>>;
+};
+
 export type Resolvers<ContextType = GraphqlContextType> = {
   Account?: AccountResolvers<ContextType>;
   Transaction?: TransactionResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
 };
 
 
