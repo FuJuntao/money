@@ -1,4 +1,4 @@
-import { AddIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon } from '@chakra-ui/icons';
 import {
   Box,
   Divider,
@@ -9,12 +9,13 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
+import type { Account } from 'src/graphql-schemas/generatedTypes';
 import { useQuery } from '../hooks/useQuery';
 import AccountEditModal from './AccountEditModal';
 
 interface ResultData {
-  accounts: { id: string; name: string }[];
+  accounts: Account[];
 }
 
 export default function AccountList() {
@@ -30,13 +31,25 @@ export default function AccountList() {
     `,
   );
 
+  const [updatingAccount, setUpdatingAccount] = useState<undefined | Account>();
+
+  const handleClickCreateNewAccountButton = () => {
+    setUpdatingAccount(undefined);
+    onOpen();
+  };
+
+  const handleClickUpdateAccountButton = (account: Account) => () => {
+    setUpdatingAccount(account);
+    onOpen();
+  };
+
   return (
     <Box>
       <Flex justifyContent="space-between">
         <Heading>Accounts</Heading>
         <IconButton
           aria-label="Create account"
-          onClick={onOpen}
+          onClick={handleClickCreateNewAccountButton}
           icon={<AddIcon />}
         />
       </Flex>
@@ -48,9 +61,16 @@ export default function AccountList() {
       ) : (
         <Stack>
           {data?.accounts.map((account) => (
-            <Heading key={account.id} as="h3">
-              {account.name}
-            </Heading>
+            <Flex key={account.id}>
+              <Heading as="h3">{account.name}</Heading>
+
+              <IconButton
+                variant="ghost"
+                aria-label="Update account"
+                icon={<EditIcon />}
+                onClick={handleClickUpdateAccountButton(account)}
+              />
+            </Flex>
           ))}
         </Stack>
       )}
@@ -58,6 +78,7 @@ export default function AccountList() {
       <AccountEditModal
         isOpen={isOpen}
         onClose={onClose}
+        account={updatingAccount}
         onSuccess={() => {
           query();
           onClose();

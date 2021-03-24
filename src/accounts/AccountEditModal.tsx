@@ -23,13 +23,8 @@ interface CreateAccountMutationVariables {
   input: { name: string };
 }
 
-interface AccountEditModalContentProps {
-  account?: { id?: number; name: string };
-  onSuccess?: (account: Account) => void;
-}
-
 const createAccountMutation = `
-mutation CreatAccount($input: CreateAccountInput!) {
+mutation CreateAccount($input: CreateAccountInput!) {
   createAccount(input: $input) {
     id
     name
@@ -37,19 +32,54 @@ mutation CreatAccount($input: CreateAccountInput!) {
 }
 `;
 
+interface UpdateAccountMutationResult {
+  updateAccount: Account;
+}
+
+interface UpdateAccountMutationVariables {
+  input: Account;
+}
+
+const updateAccountMutation = `
+mutation UpdateAccount($input: UpdateAccountInput!) {
+  updateAccount(input: $input) {
+    id
+    name
+  }
+}
+`;
+
+interface AccountEditModalContentProps {
+  account?: { id?: number; name: string };
+  onSuccess?: (account: Account) => void;
+}
+
+function isUpdatingAccount(
+  account?: AccountEditModalContentProps['account'],
+): account is Account {
+  return account?.id !== undefined;
+}
+
 function AccountEditModalContent(props: AccountEditModalContentProps) {
   const toast = useToast();
   const { account, onSuccess } = props;
-  const isCreating = account?.id === undefined;
-  const [name, setName] = useState('');
+  const isUpdating = isUpdatingAccount(account);
+  const [name, setName] = useState(account?.name ?? '');
 
-  const { mutate, isLoading } = useMutation<
+  const createAccountMutationResult = useMutation<
     CreateAccountMutationResult,
     CreateAccountMutationVariables
   >(createAccountMutation);
 
-  const createAccount = async () => {
-    const { data, errors } = await mutate({ input: { name } });
+  const updateAccountMutationResult = useMutation<
+    UpdateAccountMutationResult,
+    UpdateAccountMutationVariables
+  >(updateAccountMutation);
+
+  const createAccount = async (name: string) => {
+    const { data, errors } = await createAccountMutationResult.mutate({
+      input: { name },
+    });
     if (errors) {
       throw errors;
     }
@@ -63,13 +93,40 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
     }
   };
 
+  const updateAccount = async (account: Account) => {
+    const { data, errors } = await updateAccountMutationResult.mutate({
+      input: account,
+    });
+    console.log(
+      'file: AccountEditModal.tsx ~ line 100 ~ updateAccount ~ data',
+      data,
+    );
+    if (errors) {
+      throw errors;
+    }
+    if (data?.updateAccount) {
+      toast({
+        title: `Account '${data.updateAccount.name}' successfully updated`,
+        status: 'success',
+        isClosable: true,
+      });
+      return data.updateAccount;
+    }
+  };
+
   const handleSubmit = async () => {
     let result;
-    if (isCreating) {
-      result = await createAccount();
+    if (isUpdatingAccount(account)) {
+      result = await updateAccount({ id: account.id, name });
+    } else {
+      result = await createAccount(name);
     }
     if (result && onSuccess) onSuccess(result);
   };
+
+  const buttonIsLoading =
+    createAccountMutationResult.isLoading ||
+    updateAccountMutationResult.isLoading;
 
   return (
     <ModalContent>
@@ -84,8 +141,8 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
       </ModalBody>
 
       <ModalFooter>
-        <Button isLoading={isLoading} onClick={handleSubmit}>
-          Create new account
+        <Button isLoading={buttonIsLoading} onClick={handleSubmit}>
+          {isUpdating ? 'Update account' : 'Create new account'}
         </Button>
       </ModalFooter>
     </ModalContent>
@@ -96,12 +153,12 @@ type AccountEditModalProps = Omit<ModalProps, 'children'> &
   AccountEditModalContentProps;
 
 function AccountEditModal(props: AccountEditModalProps) {
-  const { onSuccess, ...otherProps } = props;
+  const { account, onSuccess, ...otherProps } = props;
 
   return (
     <Modal {...otherProps}>
       <ModalOverlay />
-      <AccountEditModalContent onSuccess={onSuccess} />
+      <AccountEditModalContent account={account} onSuccess={onSuccess} />
     </Modal>
   );
 }

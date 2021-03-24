@@ -19,6 +19,12 @@ input CreateAccountInput {
   name: String!
 }
 
+input UpdateAccountInput {
+  id: Int!
+  name: String!
+}
+
 type Mutation {
   createAccount(input: CreateAccountInput!): Account
+  updateAccount(input: UpdateAccountInput!): Account
 }
