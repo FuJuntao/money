@@ -1,6 +1,13 @@
+enum AccountType {
+  credit_card
+  payment_account
+  asset
+}
+
 type Account {
   id: Int!
   name: String!
+  type: AccountType!
 }
 
 type Transaction {
@@ -17,11 +24,13 @@ type Query {
 
 input CreateAccountInput {
   name: String!
+  type: AccountType!
 }
 
 input UpdateAccountInput {
   id: Int!
   name: String!
+  type: AccountType!
 }
 
 type Mutation {

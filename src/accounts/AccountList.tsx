@@ -26,6 +26,7 @@ export default function AccountList() {
         accounts {
           id
           name
+          type
         }
       }
     `,

@@ -9,10 +9,11 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
+  Select,
   useToast,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import type { Account } from 'src/graphql-schemas/generatedTypes';
+import React, { ReactNode, useState } from 'react';
+import type { Account, AccountType } from 'src/graphql-schemas/generatedTypes';
 import { useMutation } from '../hooks/useMutation';
 
 interface CreateAccountMutationResult {
@@ -20,7 +21,7 @@ interface CreateAccountMutationResult {
 }
 
 interface CreateAccountMutationVariables {
-  input: { name: string };
+  input: { name: string; type: AccountType };
 }
 
 const createAccountMutation = `
@@ -28,6 +29,7 @@ mutation CreateAccount($input: CreateAccountInput!) {
   createAccount(input: $input) {
     id
     name
+    type
   }
 }
 `;
@@ -45,12 +47,13 @@ mutation UpdateAccount($input: UpdateAccountInput!) {
   updateAccount(input: $input) {
     id
     name
+    type
   }
 }
 `;
 
 interface AccountEditModalContentProps {
-  account?: { id?: number; name: string };
+  account?: Partial<Account>;
   onSuccess?: (account: Account) => void;
 }
 
@@ -60,11 +63,18 @@ function isUpdatingAccount(
   return account?.id !== undefined;
 }
 
+const accountTypeOptions: { value: AccountType; children: ReactNode }[] = [
+  { value: 'asset', children: 'Asset' },
+  { value: 'credit_card', children: 'Credit Card' },
+  { value: 'payment_account', children: 'Payment Account' },
+];
+
 function AccountEditModalContent(props: AccountEditModalContentProps) {
   const toast = useToast();
   const { account, onSuccess } = props;
   const isUpdating = isUpdatingAccount(account);
   const [name, setName] = useState(account?.name ?? '');
+  const [type, setType] = useState<AccountType | ''>(account?.type ?? '');
 
   const createAccountMutationResult = useMutation<
     CreateAccountMutationResult,
@@ -76,9 +86,9 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
     UpdateAccountMutationVariables
   >(updateAccountMutation);
 
-  const createAccount = async (name: string) => {
+  const createAccount = async (account: Omit<Account, 'id'>) => {
     const { data, errors } = await createAccountMutationResult.mutate({
-      input: { name },
+      input: account,
     });
     if (errors) {
       throw errors;
@@ -97,10 +107,6 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
     const { data, errors } = await updateAccountMutationResult.mutate({
       input: account,
     });
-    console.log(
-      'file: AccountEditModal.tsx ~ line 100 ~ updateAccount ~ data',
-      data,
-    );
     if (errors) {
       throw errors;
     }
@@ -117,9 +123,13 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
   const handleSubmit = async () => {
     let result;
     if (isUpdatingAccount(account)) {
-      result = await updateAccount({ id: account.id, name });
+      result = await updateAccount({
+        id: account.id,
+        name,
+        type: type as AccountType,
+      });
     } else {
-      result = await createAccount(name);
+      result = await createAccount({ name, type: type as AccountType });
     }
     if (result && onSuccess) onSuccess(result);
   };
@@ -136,8 +146,17 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
         <Input
           placeholder="Account name"
           value={name}
-          onChange={({ target: { value } }) => setName(value)}
+          onChange={(e) => setName(e.target.value)}
         />
+        <Select
+          placeholder="Type"
+          value={type}
+          onChange={(e) => setType(e.target.value as AccountType)}
+        >
+          {accountTypeOptions.map((props) => (
+            <option key={props.value} {...props} />
+          ))}
+        </Select>
       </ModalBody>
 
       <ModalFooter>

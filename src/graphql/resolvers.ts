@@ -16,18 +16,18 @@ export const resolvers: Resolvers<GraphqlContextType> = {
     },
   },
   Mutation: {
-    createAccount: async (_parent, args, context) => {
+    createAccount: async (_parent, { input: { name, type } }, context) => {
       const table = context.table<CreateAccountInput>('accounts');
       return table
-        .add({ name: args.input.name })
+        .add({ name, type })
         .then(async (accountId) =>
           table.where('id').equals(accountId).first(),
         ) as Promise<Account>;
     },
-    updateAccount: async (_parent, { input: { id, name } }, context) => {
+    updateAccount: async (_parent, { input: { id, name, type } }, context) => {
       const table = context.table<UpdateAccountInput>('accounts');
       return table
-        .update(id, { name })
+        .update(id, { name, type })
         .then(async () =>
           table.where('id').equals(id).first(),
         ) as Promise<Account>;

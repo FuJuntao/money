@@ -14,10 +14,16 @@ export type Scalars = {
   Float: number;
 };
 
+export type AccountType =
+  | 'credit_card'
+  | 'payment_account'
+  | 'asset';
+
 export type Account = {
   __typename?: 'Account';
   id: Scalars['Int'];
   name: Scalars['String'];
+  type: AccountType;
 };
 
 export type Transaction = {
@@ -36,11 +42,13 @@ export type Query = {
 
 export type CreateAccountInput = {
   name: Scalars['String'];
+  type: AccountType;
 };
 
 export type UpdateAccountInput = {
   id: Scalars['Int'];
   name: Scalars['String'];
+  type: AccountType;
 };
 
 export type Mutation = {
@@ -137,6 +145,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AccountType: AccountType;
   Account: ResolverTypeWrapper<Account>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -164,6 +173,7 @@ export type ResolversParentTypes = {
 export type AccountResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['AccountType'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
