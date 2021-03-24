@@ -34,18 +34,18 @@ export type Query = {
   transactions: Array<Maybe<Transaction>>;
 };
 
-export type AddAccountInput = {
+export type CreateAccountInput = {
   name: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addAccount?: Maybe<Account>;
+  createAccount?: Maybe<Account>;
 };
 
 
-export type MutationAddAccountArgs = {
-  input: AddAccountInput;
+export type MutationCreateAccountArgs = {
+  input: CreateAccountInput;
 };
 
 
@@ -131,7 +131,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Transaction: ResolverTypeWrapper<Transaction>;
   Query: ResolverTypeWrapper<{}>;
-  AddAccountInput: AddAccountInput;
+  CreateAccountInput: CreateAccountInput;
   Mutation: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -143,7 +143,7 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Transaction: Transaction;
   Query: {};
-  AddAccountInput: AddAccountInput;
+  CreateAccountInput: CreateAccountInput;
   Mutation: {};
   Boolean: Scalars['Boolean'];
 };
@@ -168,7 +168,7 @@ export type QueryResolvers<ContextType = GraphqlContextType, ParentType extends 
 };
 
 export type MutationResolvers<ContextType = GraphqlContextType, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addAccount?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationAddAccountArgs, 'input'>>;
+  createAccount?: Resolver<Maybe<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationCreateAccountArgs, 'input'>>;
 };
 
 export type Resolvers<ContextType = GraphqlContextType> = {

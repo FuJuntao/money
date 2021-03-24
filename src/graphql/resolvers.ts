@@ -1,6 +1,6 @@
 import type {
   Account,
-  AddAccountInput,
+  CreateAccountInput,
   Resolvers,
 } from 'src/graphql-schemas/generatedTypes';
 import type { GraphqlContextType } from './graphqlContext';
@@ -15,8 +15,8 @@ export const resolvers: Resolvers<GraphqlContextType> = {
     },
   },
   Mutation: {
-    addAccount: async (_parent, args, context) => {
-      const table = context.table<AddAccountInput>('accounts');
+    createAccount: async (_parent, args, context) => {
+      const table = context.table<CreateAccountInput>('accounts');
       return table
         .add({ name: args.input.name })
         .then(async (accountId) =>

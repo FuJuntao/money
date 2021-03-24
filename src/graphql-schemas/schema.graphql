@@ -15,10 +15,10 @@ type Query {
   transactions: [Transaction]!
 }
 
-input AddAccountInput {
+input CreateAccountInput {
   name: String!
 }
 
 type Mutation {
-  addAccount(input: AddAccountInput!): Account
+  createAccount(input: CreateAccountInput!): Account
 }
