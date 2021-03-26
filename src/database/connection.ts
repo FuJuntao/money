@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 
-export async function initializeDatabase() {
+export function initializeDatabase() {
   const db = new Dexie('money');
   db.version(1).stores({
     accounts: '++id, name, type',
@@ -8,3 +8,5 @@ export async function initializeDatabase() {
   });
   return db;
 }
+
+export const db = initializeDatabase();

@@ -10,27 +10,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import type { Account } from 'src/graphql-schemas/generatedTypes';
-import { useQuery } from '../hooks/useQuery';
+import type { Account } from '../database/accounts/types';
+import { useGetAccountsAlive } from '../database/accounts/useGetAccountsAlive';
 import AccountEditModal from './AccountEditModal';
-
-interface ResultData {
-  accounts: Account[];
-}
 
 export default function AccountList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { query, data, isLoading } = useQuery<ResultData>(
-    `
-      query Accounts {
-        accounts {
-          id
-          name
-          type
-        }
-      }
-    `,
-  );
+  const accounts = useGetAccountsAlive();
 
   const [updatingAccount, setUpdatingAccount] = useState<undefined | Account>();
 
@@ -57,11 +43,11 @@ export default function AccountList() {
 
       <Divider />
 
-      {isLoading ? (
+      {!accounts ? (
         <Spinner />
       ) : (
         <Stack>
-          {data?.accounts.map((account) => (
+          {accounts.map((account) => (
             <Flex key={account.id}>
               <Heading as="h3">{account.name}</Heading>
 
@@ -80,10 +66,7 @@ export default function AccountList() {
         isOpen={isOpen}
         onClose={onClose}
         account={updatingAccount}
-        onSuccess={() => {
-          query();
-          onClose();
-        }}
+        onSuccess={onClose}
       />
     </Box>
   );

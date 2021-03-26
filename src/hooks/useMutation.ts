@@ -1,40 +1,34 @@
 import { useBoolean } from '@chakra-ui/react';
-import type { ExecutionResult } from 'graphql';
 import { useCallback, useState } from 'react';
-import { makeQuery } from '../graphql/makeQuery';
 
-interface Options<Variables> {
-  variables: Variables;
-}
-
-export const useMutation = <Result, Variables = unknown>(
-  source: string,
-  options?: Options<Variables>,
+export const useMutation = <Args extends unknown[], Returned = unknown>(
+  fn: (...args: Args) => Returned,
 ) => {
   const [isLoading, { on: setIsLoading, off: setIsNotLoading }] = useBoolean();
-  const [result, setResult] = useState<null | ExecutionResult<Result>>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [result, setResult] = useState<null | Returned>(null);
 
   const mutate = useCallback(
-    async (variables?: Variables) => {
+    async (...args: Args) => {
       try {
         setIsLoading();
-        const result = await makeQuery<Result>({
-          source,
-          variableValues: variables ?? options?.variables,
-        });
+        const result = await fn(...args);
         setResult(result);
         return result;
+      } catch (err) {
+        setError(err);
+        throw err;
       } finally {
         setIsNotLoading();
       }
     },
-    [options?.variables, setIsLoading, setIsNotLoading, source],
+    [fn, setIsLoading, setIsNotLoading],
   );
 
   return {
     mutate,
-    data: result?.data ?? null,
-    errors: result?.errors ?? null,
+    data: result,
+    errors: error,
     isLoading,
   };
 };

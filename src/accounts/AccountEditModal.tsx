@@ -13,44 +13,10 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import React, { ReactNode, useState } from 'react';
-import type { Account, AccountType } from 'src/graphql-schemas/generatedTypes';
+import { createAccount } from '../database/accounts/createAccount';
+import type { Account, AccountType } from '../database/accounts/types';
+import { updateAccount } from '../database/accounts/updateAccount';
 import { useMutation } from '../hooks/useMutation';
-
-interface CreateAccountMutationResult {
-  createAccount: Account;
-}
-
-interface CreateAccountMutationVariables {
-  input: { name: string; type: AccountType };
-}
-
-const createAccountMutation = `
-mutation CreateAccount($input: CreateAccountInput!) {
-  createAccount(input: $input) {
-    id
-    name
-    type
-  }
-}
-`;
-
-interface UpdateAccountMutationResult {
-  updateAccount: Account;
-}
-
-interface UpdateAccountMutationVariables {
-  input: Account;
-}
-
-const updateAccountMutation = `
-mutation UpdateAccount($input: UpdateAccountInput!) {
-  updateAccount(input: $input) {
-    id
-    name
-    type
-  }
-}
-`;
 
 interface AccountEditModalContentProps {
   account?: Partial<Account>;
@@ -76,60 +42,43 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
   const [name, setName] = useState(account?.name ?? '');
   const [type, setType] = useState<AccountType | ''>(account?.type ?? '');
 
-  const createAccountMutationResult = useMutation<
-    CreateAccountMutationResult,
-    CreateAccountMutationVariables
-  >(createAccountMutation);
+  const createAccountMutationResult = useMutation(createAccount);
+  const updateAccountMutationResult = useMutation(updateAccount);
 
-  const updateAccountMutationResult = useMutation<
-    UpdateAccountMutationResult,
-    UpdateAccountMutationVariables
-  >(updateAccountMutation);
-
-  const createAccount = async (account: Omit<Account, 'id'>) => {
-    const { data, errors } = await createAccountMutationResult.mutate({
-      input: account,
-    });
-    if (errors) {
-      throw errors;
-    }
-    if (data?.createAccount) {
+  const createAccountFn = async (account: Omit<Account, 'id'>) => {
+    const result = await createAccountMutationResult.mutate(account);
+    if (result) {
       toast({
-        title: `Account '${data.createAccount.name}' successfully created`,
+        title: `Account '${result.name}' successfully created`,
         status: 'success',
         isClosable: true,
       });
-      return data.createAccount;
+      return result;
     }
   };
 
-  const updateAccount = async (account: Account) => {
-    const { data, errors } = await updateAccountMutationResult.mutate({
-      input: account,
-    });
-    if (errors) {
-      throw errors;
-    }
-    if (data?.updateAccount) {
+  const updateAccountFn = async (account: Account) => {
+    const result = await updateAccountMutationResult.mutate(account);
+    if (result) {
       toast({
-        title: `Account '${data.updateAccount.name}' successfully updated`,
+        title: `Account '${result.name}' successfully updated`,
         status: 'success',
         isClosable: true,
       });
-      return data.updateAccount;
+      return result;
     }
   };
 
   const handleSubmit = async () => {
     let result;
     if (isUpdatingAccount(account)) {
-      result = await updateAccount({
+      result = await updateAccountFn({
         id: account.id,
         name,
         type: type as AccountType,
       });
     } else {
-      result = await createAccount({ name, type: type as AccountType });
+      result = await createAccountFn({ name, type: type as AccountType });
     }
     if (result && onSuccess) onSuccess(result);
   };
