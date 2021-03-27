@@ -1,5 +1,6 @@
 import { AddIcon, EditIcon } from '@chakra-ui/icons';
 import {
+  Badge,
   Box,
   Divider,
   Flex,
@@ -9,14 +10,15 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useLiveQuery } from 'dexie-react-hooks';
 import React, { useState } from 'react';
+import { getAccounts } from '../database/accounts/getAccounts';
 import type { Account } from '../database/accounts/types';
-import { useGetAccountsAlive } from '../database/accounts/useGetAccountsAlive';
-import AccountEditModal from './AccountEditModal';
+import AccountEditModal, { accountTypeTitle } from './AccountEditModal';
 
 export default function AccountList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const accounts = useGetAccountsAlive();
+  const accounts = useLiveQuery(getAccounts);
 
   const [updatingAccount, setUpdatingAccount] = useState<undefined | Account>();
 
@@ -48,16 +50,20 @@ export default function AccountList() {
       ) : (
         <Stack>
           {accounts.map((account) => (
-            <Flex key={account.id}>
-              <Heading as="h3">{account.name}</Heading>
+            <Box key={account.id}>
+              <Flex alignItems="center">
+                <Heading as="h3">{account.name}</Heading>
 
-              <IconButton
-                variant="ghost"
-                aria-label="Update account"
-                icon={<EditIcon />}
-                onClick={handleClickUpdateAccountButton(account)}
-              />
-            </Flex>
+                <Badge>{accountTypeTitle[account.type]}</Badge>
+
+                <IconButton
+                  variant="ghost"
+                  aria-label="Update account"
+                  icon={<EditIcon />}
+                  onClick={handleClickUpdateAccountButton(account)}
+                />
+              </Flex>
+            </Box>
           ))}
         </Stack>
       )}

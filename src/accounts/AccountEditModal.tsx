@@ -12,7 +12,7 @@ import {
   Select,
   useToast,
 } from '@chakra-ui/react';
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { createAccount } from '../database/accounts/createAccount';
 import type { Account, AccountType } from '../database/accounts/types';
 import { updateAccount } from '../database/accounts/updateAccount';
@@ -29,11 +29,13 @@ function isUpdatingAccount(
   return account?.id !== undefined;
 }
 
-const accountTypeOptions: { value: AccountType; children: ReactNode }[] = [
-  { value: 'asset', children: 'Asset' },
-  { value: 'credit_card', children: 'Credit Card' },
-  { value: 'payment_account', children: 'Payment Account' },
-];
+export const accountTypeTitle: Record<AccountType, string> = {
+  asset: 'Asset',
+  credit_card: 'Credit Card',
+  payment_account: 'Payment Account',
+};
+
+const accountTypes: AccountType[] = ['asset', 'credit_card', 'payment_account'];
 
 function AccountEditModalContent(props: AccountEditModalContentProps) {
   const toast = useToast();
@@ -102,8 +104,10 @@ function AccountEditModalContent(props: AccountEditModalContentProps) {
           value={type}
           onChange={(e) => setType(e.target.value as AccountType)}
         >
-          {accountTypeOptions.map((props) => (
-            <option key={props.value} {...props} />
+          {accountTypes.map((accountType) => (
+            <option key={accountType} value={accountType}>
+              {accountTypeTitle[accountType]}
+            </option>
           ))}
         </Select>
       </ModalBody>
