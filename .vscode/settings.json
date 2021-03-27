@@ -1,4 +1,9 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "cSpell.words": [
+    "chakra",
+    "dexie",
+    "formik"
+  ]
 }
