@@ -34,8 +34,7 @@ export default function AccountList() {
 
   return (
     <Box>
-      <Flex justifyContent="space-between">
-        <Heading>Accounts</Heading>
+      <Flex justifyContent="flex-end">
         <IconButton
           aria-label="Create account"
           onClick={handleClickCreateNewAccountButton}
@@ -43,7 +42,7 @@ export default function AccountList() {
         />
       </Flex>
 
-      <Divider />
+      <Divider my="4" />
 
       {!accounts ? (
         <Spinner />
