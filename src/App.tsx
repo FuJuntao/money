@@ -9,9 +9,10 @@ import {
 import React, { ElementType, ReactNode } from 'react';
 import AccountList from './accounts/AccountList';
 import { theme } from './theme';
+import TransactionsList from './transactions/TransactionsList';
 
 const tabList: { id: string; tab: ReactNode; Content: ElementType }[] = [
-  { id: 'transactions', tab: 'Transactions', Content: () => null },
+  { id: 'transactions', tab: 'Transactions', Content: TransactionsList },
   { id: 'accounts', tab: 'Accounts', Content: AccountList },
 ];
 
