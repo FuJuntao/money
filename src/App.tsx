@@ -15,24 +15,30 @@ const tabList: { id: string; tab: ReactNode; Content: ElementType }[] = [
   { id: 'accounts', tab: 'Accounts', Content: AccountList },
 ];
 
+function Homepage() {
+  return (
+    <Tabs isLazy h="full" display="flex" flexDirection="column">
+      <TabPanels flex="1">
+        {tabList.map(({ id, Content }) => (
+          <TabPanel key={id}>
+            <Content />
+          </TabPanel>
+        ))}
+      </TabPanels>
+
+      <TabList>
+        {tabList.map(({ id, tab }) => (
+          <Tab key={id}>{tab}</Tab>
+        ))}
+      </TabList>
+    </Tabs>
+  );
+}
+
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Tabs h="full" display="flex" flexDirection="column">
-        <TabPanels flex="1">
-          {tabList.map(({ id, Content }) => (
-            <TabPanel key={id}>
-              <Content />
-            </TabPanel>
-          ))}
-        </TabPanels>
-
-        <TabList>
-          {tabList.map(({ id, tab }) => (
-            <Tab key={id}>{tab}</Tab>
-          ))}
-        </TabList>
-      </Tabs>
+      <Homepage />
     </ChakraProvider>
   );
 }
