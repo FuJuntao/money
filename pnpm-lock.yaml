@@ -17,7 +17,7 @@ importers:
       '@snowpack/plugin-dotenv': 2.0.5
       '@snowpack/plugin-react-refresh': 2.4.1_react-dom@17.0.2+react@17.0.2
       '@snowpack/plugin-typescript': 1.2.1_typescript@4.2.3
-      '@snowpack/web-test-runner-plugin': 0.2.2_eab9d342b339ca0b69db5e856f075ed6
+      '@snowpack/web-test-runner-plugin': 0.2.2_c731611d21747adab599b93c8a058086
       '@testing-library/react': 11.2.5_react-dom@17.0.2+react@17.0.2
       '@types/chai-dom': 0.0.10
       '@types/mocha': 8.2.2
@@ -41,8 +41,7 @@ importers:
       eslint-plugin-react-hooks: 4.2.0_eslint@7.22.0
       mocha: 8.3.2
       prettier: 2.2.1
-      snowpack: 3.1.2
-      snowpack-plugin-raw-file-loader: 1.0.9
+      snowpack: 3.0.13
       typescript: 4.2.3
     specifiers:
       '@chakra-ui/icons': ^1.0.7
@@ -83,8 +82,7 @@ importers:
       prettier: ^2.2.1
       react: ^17.0.2
       react-dom: ^17.0.2
-      snowpack: ^3.1.2
-      snowpack-plugin-raw-file-loader: ^1.0.9
+      snowpack: 3.0.13
       typescript: 4.2.3
       yup: ^0.32.9
   packages/client-web:
@@ -2531,10 +2529,10 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-wU+JNaMVkqGsqTaUY7TnEMhGt/3URTgA9dpMCtZX6wn/ceA7Gwlmue/sOLynf0OTNLygHPvjiQECQYkEi3LTtg==
-  /@snowpack/web-test-runner-plugin/0.2.2_eab9d342b339ca0b69db5e856f075ed6:
+  /@snowpack/web-test-runner-plugin/0.2.2_c731611d21747adab599b93c8a058086:
     dependencies:
       '@web/test-runner': 0.12.17
-      snowpack: 3.1.2
+      snowpack: 3.0.13
     dev: true
     peerDependencies:
       '@web/test-runner': '>=0.10.0 <1.0.0'
@@ -3808,12 +3806,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==
-  /cli-spinners/2.6.0:
-    dev: true
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-t+4/y50K/+4xcCRosKkA7W4gTr1MySvLV0q+PxmG7FJ5g+66ChKurYjxBCjHggHH3HA5Hh9cy+lcUGWDqVH+4Q==
   /cliui/7.0.4:
     dependencies:
       string-width: 4.2.2
@@ -4347,12 +4339,12 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
-  /esbuild/0.9.6:
+  /esbuild/0.8.57:
     dev: true
     hasBin: true
     requiresBuild: true
     resolution:
-      integrity: sha512-F6vASxU0wT/Davt9aj2qtDwDNSkQxh9VbyO56M7PDWD+D/Vgq/rmUDGDQo7te76W5auauVojjnQr/wTu3vpaUA==
+      integrity: sha512-j02SFrUwFTRUqiY0Kjplwjm1psuzO1d6AjaXKuOR9hrY0HuPsT6sV42B6myW34h1q4CRy+Y3g4RU/cGJeI/nNA==
   /escalade/3.1.1:
     dev: true
     engines:
@@ -4813,10 +4805,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-JcfInLH5B3+IkbvmHY85Dq4lbx4=
-  /fdir/5.0.0:
-    dev: true
-    resolution:
-      integrity: sha512-cteqwWMA43lEmgwOg5HSdvhVFD39vHjQDhZkRMlKmeoNPtSSgUw1nUypydiY2upMdGiBFBZvNBDbnoBh0yCzaQ==
   /file-entry-cache/6.0.1:
     dependencies:
       flat-cache: 3.0.4
@@ -7175,6 +7163,15 @@ packages:
       fsevents: 2.3.2
     resolution:
       integrity: sha512-Zqv3EvNfcllBHyyEUM754npqsZw82VIjK34cDQMwrQ1d6aqxzeYu5yFb7smGkPU4C1Bj7HupIMeT6WU7uIdnMw==
+  /rollup/2.44.0:
+    dev: true
+    engines:
+      node: '>=10.0.0'
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    resolution:
+      integrity: sha512-rGSF4pLwvuaH/x4nAS+zP6UNn5YUDWf/TeEU5IoXSZKBbKRNTCI3qMnYXKZgrC0D2KzS2baiOZt1OlqhMu5rnQ==
   /rsvp/4.8.5:
     dev: true
     engines:
@@ -7370,20 +7367,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-FtyOnWN/wCHTVXOMwvSv26d+ko5vWlIDD6zoUJ7LW8vh+ZBC8QdljveRP+crNrtBwioEUWy/4dMtbBjA4ioNlg==
-  /snowpack-plugin-raw-file-loader/1.0.9:
-    dev: true
-    resolution:
-      integrity: sha512-GY7MuommuHfUo7ZfPu/yeyZ7oY7vybTcIc/1JBkg3IwLDNKckprIuhPp8XAvO3gZdCTucDIw6iL2dVEId3GhJw==
-  /snowpack/3.1.2:
+  /snowpack/3.0.13:
     dependencies:
-      cli-spinners: 2.6.0
       default-browser-id: 2.0.0
-      esbuild: 0.9.6
-      fdir: 5.0.0
+      esbuild: 0.8.57
       open: 7.4.2
-      picomatch: 2.2.2
       resolve: 1.20.0
-      rollup: 2.42.4
+      rollup: 2.44.0
     dev: true
     engines:
       node: '>=10.19.0'
@@ -7391,7 +7381,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     resolution:
-      integrity: sha512-LsYlBNjB/t/p5QP434Pa1TqjyuX8VtXiYQaAWZkOn1d1TVKEt7nigMBr8Z+EDXYn6YlLXYKHXDvv/NhUS7Ri9A==
+      integrity: sha512-USTcpfJ68rbuFvUygw+3n9qS1CC/tGsr/JNVc6FNk0ZRfGBE4OmB+Mmk5nWtdxi546GeCr/GvveJenYLen/WpA==
   /source-map-resolve/0.5.3:
     dependencies:
       atob: 2.1.2
