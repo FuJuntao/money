@@ -7,15 +7,18 @@ import {
   ModalProps,
 } from '@chakra-ui/react';
 import React from 'react';
+import TransactionEditForm from './TransactionEditForm';
 
 interface AddTransactionModalContentProps {}
 
 function AddTransactionModalContent() {
+  const handleSubmitForm = () => {};
+
   return (
     <ModalContent>
       <ModalHeader>Transaction</ModalHeader>
       <ModalCloseButton />
-      form
+      <TransactionEditForm onSubmit={handleSubmitForm} />
     </ModalContent>
   );
 }
