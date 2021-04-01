@@ -2,7 +2,7 @@ import {
   Collapse,
   FormControl,
   FormControlProps,
-  FormHelperText,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { FieldInputProps, useField } from 'formik';
 import React, { ReactNode } from 'react';
@@ -28,7 +28,7 @@ export default function FormikFormControl<Value = unknown>(
       {children(fieldInputProps)}
 
       <Collapse in={isInvalid}>
-        <FormHelperText>{error}</FormHelperText>
+        <FormErrorMessage>{error}</FormErrorMessage>
       </Collapse>
     </FormControl>
   );
