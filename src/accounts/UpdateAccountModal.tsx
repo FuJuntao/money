@@ -51,7 +51,7 @@ function UpdateAccountModalContent(props: UpdateAccountModalContentProps) {
         initialValues={account}
         renderActions={(formik) => (
           <ModalFooter>
-            <Button isLoading={formik.isSubmitting} onClick={formik.submitForm}>
+            <Button type="submit" isLoading={formik.isSubmitting}>
               Update
             </Button>
           </ModalFooter>

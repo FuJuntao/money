@@ -47,7 +47,7 @@ function CreateAccountModalContent(props: CreateAccountModalContentProps) {
         initialValues={account}
         renderActions={(formik) => (
           <ModalFooter>
-            <Button isLoading={formik.isSubmitting} onClick={formik.submitForm}>
+            <Button type="submit" isLoading={formik.isSubmitting}>
               Create new account
             </Button>
           </ModalFooter>

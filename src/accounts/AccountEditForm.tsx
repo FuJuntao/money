@@ -1,5 +1,11 @@
-import { Input, ModalBody, Select } from '@chakra-ui/react';
-import { FormikConfig, FormikProps, FormikProvider, useFormik } from 'formik';
+import { Input, ModalBody, Select, VStack } from '@chakra-ui/react';
+import {
+  Form,
+  FormikConfig,
+  FormikProps,
+  FormikProvider,
+  useFormik,
+} from 'formik';
 import React, { ReactNode, useMemo } from 'react';
 import * as yup from 'yup';
 import FormikFormControl from '../components/FormikFormControl';
@@ -43,25 +49,27 @@ export default function AccountEditForm(props: AccountEditFormProps) {
 
   return (
     <FormikProvider value={formik}>
-      <ModalBody>
-        <FormikFormControl<Values['name']> id="name">
-          {(props) => <Input {...props} placeholder="Account name" />}
-        </FormikFormControl>
+      <Form>
+        <ModalBody as={VStack} spacing={4}>
+          <FormikFormControl<Values['name']> id="name">
+            {(props) => <Input {...props} placeholder="Account name" />}
+          </FormikFormControl>
 
-        <FormikFormControl<Values['type']> id="type">
-          {(props) => (
-            <Select {...props} placeholder="Select an account type">
-              {accountTypes.map((accountType) => (
-                <option key={accountType} value={accountType}>
-                  {accountTypeTitle[accountType]}
-                </option>
-              ))}
-            </Select>
-          )}
-        </FormikFormControl>
-      </ModalBody>
+          <FormikFormControl<Values['type']> id="type">
+            {(props) => (
+              <Select {...props} placeholder="Select an account type">
+                {accountTypes.map((accountType) => (
+                  <option key={accountType} value={accountType}>
+                    {accountTypeTitle[accountType]}
+                  </option>
+                ))}
+              </Select>
+            )}
+          </FormikFormControl>
+        </ModalBody>
 
-      {renderActions?.(formik)}
+        {renderActions?.(formik)}
+      </Form>
     </FormikProvider>
   );
 }
