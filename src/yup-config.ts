@@ -7,8 +7,7 @@ function maxDigitsAfterDecimal(
 ) {
   return this.test(
     'maxDigitsAfterDecimal',
-    message ??
-      ` "number field must have ${maxDigits} digits after decimal or less",`,
+    message ?? `\${path} must have ${maxDigits} digits or less after decimal`,
     (value = 0) => Number.isInteger(value * 10 ** maxDigits),
   );
 }
