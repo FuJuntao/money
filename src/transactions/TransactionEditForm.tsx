@@ -18,7 +18,7 @@ interface Values {
   accountId: ID | string;
 }
 
-interface SubmitValues {
+export interface SubmitValues {
   amount: number;
   accountId: ID;
 }

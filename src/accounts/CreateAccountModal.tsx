@@ -9,6 +9,7 @@ import {
   ModalProps,
   useToast,
 } from '@chakra-ui/react';
+import Dexie from 'dexie';
 import React from 'react';
 import { createAccount } from '../database/accounts/createAccount';
 import type { Account, AccountType } from '../database/accounts/types';
@@ -27,14 +28,19 @@ function CreateAccountModalContent(props: CreateAccountModalContentProps) {
   const { mutate } = useMutation(createAccount);
 
   const onSubmit = async ({ name, type }: Values) => {
-    const result = await mutate({ name, type: type as AccountType });
-    if (result) {
-      toast({
-        title: `Account '${result.name}' successfully created`,
-        status: 'success',
-        isClosable: true,
-      });
-      if (onSuccess) onSuccess(result);
+    try {
+      const result = await mutate({ name, type: type as AccountType });
+      if (result) {
+        toast({
+          title: `Account '${result.name}' successfully created`,
+          status: 'success',
+          isClosable: true,
+        });
+        if (onSuccess) onSuccess(result);
+      }
+    } catch (err: unknown) {
+      if (err instanceof Dexie.DexieError)
+        toast({ title: err.message, status: 'error', isClosable: true });
     }
   };
 
