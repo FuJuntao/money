@@ -1,14 +1,15 @@
 import type { ID, WithID } from '../MoneyDB';
 
-export type InOutType = 'in' | 'out';
+export type TransactionType = 'in' | 'out' | 'transfer';
 
 export type Transaction = {
   accountId: ID;
   amount: number;
   createdAt: Date;
   id?: ID;
-  inOutType: InOutType;
   oppositeAccountId?: ID;
+  remark: string;
+  transactionType: TransactionType;
   updatedAt: Date;
 };
 
