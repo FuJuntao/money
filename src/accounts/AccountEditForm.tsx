@@ -1,11 +1,5 @@
 import { Input, ModalBody, Select, VStack } from '@chakra-ui/react';
-import {
-  Form,
-  FormikConfig,
-  FormikProps,
-  FormikProvider,
-  useFormik,
-} from 'formik';
+import { Form, FormikProps, FormikProvider, useFormik } from 'formik';
 import React, { ReactNode, useMemo } from 'react';
 import * as yup from 'yup';
 import FormikFormControl from '../components/FormikFormControl';
@@ -20,7 +14,7 @@ export type Values = {
 interface AccountEditFormProps {
   initialValues?: Partial<Values>;
   renderActions?: (formik: FormikProps<Values>) => ReactNode;
-  onSubmit: FormikConfig<Values>['onSubmit'];
+  onSubmit: (values: Values) => void | Promise<void>;
 }
 
 const accountTypes: AccountType[] = ['payment_account', 'credit_card', 'asset'];
@@ -44,7 +38,7 @@ export default function AccountEditForm(props: AccountEditFormProps) {
   const formik = useFormik<Values>({
     initialValues,
     validationSchema,
-    onSubmit,
+    onSubmit: async (values) => onSubmit(values),
   });
 
   return (

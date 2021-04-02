@@ -1,7 +1,5 @@
-import { db } from '../connection';
-import type { AccountsTable } from './types';
+import { db } from '../MoneyDB';
 
 export function getAccounts() {
-  const table: AccountsTable = db.table('accounts');
-  return table.toArray();
+  return db.accounts.toArray();
 }

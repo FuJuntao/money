@@ -1,13 +1,10 @@
-import { db } from '../connection';
+import { db } from '../MoneyDB';
 import type { Account } from './types';
 
-type AccountOmitId = Omit<Account, 'id'>;
-
-export function createAccount({ name, type }: AccountOmitId) {
-  return db
-    .table<AccountOmitId>('accounts')
+export function createAccount({ name, type }: Account) {
+  return db.accounts
     .add({ name, type })
     .then(async (accountId) =>
-      db.table<Account, 'id'>('accounts').where('id').equals(accountId).first(),
+      db.accounts.where('id').equals(accountId).first(),
     );
 }

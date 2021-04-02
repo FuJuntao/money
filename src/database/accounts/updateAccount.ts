@@ -1,9 +1,9 @@
-import { db } from '../connection';
-import type { Account } from './types';
+import { db } from '../MoneyDB';
+import type { AccountWithID } from './types';
 
-export function updateAccount({ id, name, type }: Account) {
-  const table = db.table<Account>('accounts');
+export function updateAccount({ id, name, type }: AccountWithID) {
+  const table = db.accounts;
   return table
     .update(id, { name, type })
-    .then(async () => table.where('id').equals(id).first());
+    .then(() => table.where('id').equals(id).first());
 }

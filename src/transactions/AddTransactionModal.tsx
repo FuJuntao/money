@@ -1,7 +1,9 @@
 import {
+  Button,
   Modal,
   ModalCloseButton,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
   ModalProps,
@@ -18,7 +20,16 @@ function AddTransactionModalContent() {
     <ModalContent>
       <ModalHeader>Transaction</ModalHeader>
       <ModalCloseButton />
-      <TransactionEditForm onSubmit={handleSubmitForm} />
+      <TransactionEditForm
+        renderActions={(formik) => (
+          <ModalFooter>
+            <Button type="submit" isLoading={formik.isSubmitting}>
+              Add
+            </Button>
+          </ModalFooter>
+        )}
+        onSubmit={handleSubmitForm}
+      />
     </ModalContent>
   );
 }

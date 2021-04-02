@@ -10,14 +10,14 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import React from 'react';
-import type { Account, AccountType } from '../database/accounts/types';
+import type { AccountType, AccountWithID } from '../database/accounts/types';
 import { updateAccount } from '../database/accounts/updateAccount';
 import { useMutation } from '../hooks/useMutation';
 import AccountEditForm, { Values } from './AccountEditForm';
 
 interface UpdateAccountModalContentProps {
-  account: Account;
-  onSuccess?: (account: Account) => void;
+  account: AccountWithID;
+  onSuccess?: (account: AccountWithID) => void;
 }
 
 function UpdateAccountModalContent(props: UpdateAccountModalContentProps) {

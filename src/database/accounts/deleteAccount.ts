@@ -1,7 +1,5 @@
-import { db } from '../connection';
-import type { ID } from '../types';
-import type { Account } from './types';
+import { db, ID } from '../MoneyDB';
 
 export function deleteAccount({ id }: { id: ID }) {
-  return db.table<Account>('accounts').where('id').equals(id).delete();
+  return db.accounts.where('id').equals(id).delete();
 }

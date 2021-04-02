@@ -17,8 +17,8 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { deleteAccount } from '../database/accounts/deleteAccount';
-import type { Account, AccountType } from '../database/accounts/types';
-import type { ID } from '../database/types';
+import type { AccountType, AccountWithID } from '../database/accounts/types';
+import type { ID } from '../database/MoneyDB';
 import { useMutation } from '../hooks/useMutation';
 import UpdateAccountModal from './UpdateAccountModal';
 
@@ -72,7 +72,7 @@ function AccountDeleteIconButton(props: AccountDeleteIconButtonProps) {
 }
 
 interface AccountUpdateIconButtonProps {
-  account: Account;
+  account: AccountWithID;
 }
 
 function AccountUpdateIconButton(props: AccountUpdateIconButtonProps) {
@@ -99,7 +99,7 @@ function AccountUpdateIconButton(props: AccountUpdateIconButtonProps) {
 }
 
 interface AccountListItemProps {
-  account: Account;
+  account: AccountWithID;
 }
 
 export default function AccountListItem(props: AccountListItemProps) {
