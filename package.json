@@ -15,7 +15,7 @@
     "dexie": "^3.1.0-alpha.9",
     "dexie-react-hooks": "^1.0.6",
     "formik": "^2.2.6",
-    "framer-motion": "^4.1.0",
+    "framer-motion": "^4.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "yup": "^0.32.9"
@@ -34,7 +34,7 @@
     "@types/snowpack-env": "^2.3.3",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
-    "@web/test-runner": "^0.12.17",
+    "@web/test-runner": "^0.12.18",
     "babel-eslint": "^10.1.0",
     "chai": "npm:@esm-bundle/chai@^4.3.4",
     "chai-dom": "^1.9.0",
