@@ -1,4 +1,5 @@
 import {
+  Collapse,
   ModalBody,
   NumberInput,
   NumberInputField,
@@ -6,58 +7,54 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { Form, FormikProps, FormikProvider, useFormik } from 'formik';
+import {
+  Form,
+  FormikProps,
+  FormikProvider,
+  useFormik,
+  useFormikContext,
+} from 'formik';
 import React, { ReactNode, useMemo } from 'react';
 import * as yup from 'yup';
 import FormikFormControl from '../components/FormikFormControl';
 import { getAccounts } from '../database/accounts/getAccounts';
 import type { ID } from '../database/MoneyDB';
+import type { TransactionType } from '../database/transactions/types';
 
 interface Values {
+  accountId: string;
   amount: string;
-  accountId: ID | string;
+  transactionType: TransactionType;
+  transferToAccountId: string;
 }
 
-export interface SubmitValues {
-  amount: number;
-  accountId: ID;
-}
+const transactionTypes: TransactionType[] = ['out', 'in', 'transfer'];
+const transactionTypeTitle: Record<TransactionType, string> = {
+  out: 'Expense',
+  in: 'Income',
+  transfer: 'Transfer',
+};
 
-interface TransactionEditFormProps {
-  initialValues?: Partial<Values>;
-  renderActions?: (formik: FormikProps<Values>) => ReactNode;
-  onSubmit: (values: SubmitValues) => void | Promise<void>;
-}
-
-const validationSchema = yup.object({
-  amount: yup.number().label('Amount').required().moreThan(0).maxDigits(2),
-  accountId: yup.number().label('Account').required(),
-});
-
-export default function TransactionEditForm(props: TransactionEditFormProps) {
-  const { initialValues: initialValuesProp, renderActions, onSubmit } = props;
-
-  const initialValues = useMemo(
-    () => ({
-      amount: initialValuesProp?.amount ?? '',
-      accountId: initialValuesProp?.accountId ?? '',
-    }),
-    [initialValuesProp?.accountId, initialValuesProp?.amount],
+function TransactionTypeField() {
+  return (
+    <FormikFormControl<Values['transactionType']> id="transactionType">
+      {(props) => (
+        <Select {...props}>
+          {transactionTypes?.map((type) => (
+            <option key={type} value={type}>
+              {transactionTypeTitle[type]}
+            </option>
+          ))}
+        </Select>
+      )}
+    </FormikFormControl>
   );
+}
 
-  const handleSubmit = async ({ amount, accountId }: Values) =>
-    onSubmit({
-      amount: Number.parseFloat(amount),
-      accountId: Number.parseInt(accountId.toString()),
-    });
+function AmountField() {
+  const formik = useFormikContext();
 
-  const formik = useFormik<Values>({
-    initialValues,
-    validationSchema,
-    onSubmit: handleSubmit,
-  });
-
-  const amountField = (
+  return (
     <FormikFormControl<Values['amount']> id="amount">
       {(props) => (
         <NumberInput
@@ -72,9 +69,12 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
       )}
     </FormikFormControl>
   );
+}
 
+function AccountField() {
   const accounts = useLiveQuery(getAccounts);
-  const accountField = (
+
+  return (
     <FormikFormControl<Values['accountId']> id="accountId">
       {(props) => (
         <Select {...props} placeholder="Select an account">
@@ -87,13 +87,108 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
       )}
     </FormikFormControl>
   );
+}
+
+function TransferToAccountField() {
+  const accounts = useLiveQuery(getAccounts);
+
+  return (
+    <FormikFormControl<Values['transferToAccountId']> id="transferToAccountId">
+      {(props) => (
+        <Select {...props} placeholder="Transfer to">
+          {accounts?.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </Select>
+      )}
+    </FormikFormControl>
+  );
+}
+
+export interface SubmitValues {
+  accountId: ID;
+  amount: number;
+  transactionType: TransactionType;
+  transferToAccountId?: ID;
+}
+
+interface TransactionEditFormProps {
+  initialValues?: {
+    accountId?: ID;
+    amount?: number;
+    transactionType?: TransactionType;
+    transferToAccountId?: ID;
+  };
+  renderActions?: (formik: FormikProps<Values>) => ReactNode;
+  onSubmit: (values: SubmitValues) => void | Promise<void>;
+}
+
+const validationSchema = yup.object({
+  transactionType: yup.string().required(),
+  amount: yup.number().label('Amount').required().moreThan(0).maxDigits(2),
+  accountId: yup.string().label('Account').required(),
+  transferToAccountId: yup
+    .string()
+    .label('Transfer to')
+    .when('transactionType', { is: 'transfer', then: yup.string().required() }),
+});
+
+export default function TransactionEditForm(props: TransactionEditFormProps) {
+  const { initialValues: initialValuesProp, renderActions, onSubmit } = props;
+
+  const initialValues = useMemo<Values>(
+    () => ({
+      accountId: initialValuesProp?.accountId?.toString() ?? '',
+      amount: initialValuesProp?.amount?.toString() ?? '',
+      transactionType: initialValuesProp?.transactionType ?? 'out',
+      transferToAccountId:
+        initialValuesProp?.transferToAccountId?.toString() ?? '',
+    }),
+    [
+      initialValuesProp?.accountId,
+      initialValuesProp?.amount,
+      initialValuesProp?.transactionType,
+      initialValuesProp?.transferToAccountId,
+    ],
+  );
+
+  const handleSubmit = async ({
+    amount,
+    accountId,
+    transactionType,
+    transferToAccountId,
+  }: Values) =>
+    onSubmit({
+      transactionType,
+      amount: Number.parseFloat(amount),
+      accountId: Number.parseInt(accountId.toString()),
+      ...(transactionType === 'transfer'
+        ? {
+            transferToAccountId: Number.parseInt(
+              transferToAccountId.toString(),
+            ),
+          }
+        : null),
+    });
+
+  const formik = useFormik<Values>({
+    initialValues,
+    validationSchema,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <FormikProvider value={formik}>
       <Form>
-        <ModalBody as={VStack} spacing={4}>
-          {amountField}
-          {accountField}
+        <ModalBody as={VStack} align="stretch" spacing={4}>
+          <TransactionTypeField />
+          <AmountField />
+          <AccountField />
+          <Collapse in={formik.values.transactionType === 'transfer'}>
+            <TransferToAccountField />
+          </Collapse>
         </ModalBody>
 
         {renderActions?.(formik)}
