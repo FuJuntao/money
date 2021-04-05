@@ -9,7 +9,7 @@ import {
 import React, { ElementType, ReactNode } from 'react';
 import AccountList from './accounts/AccountList';
 import { theme } from './theme';
-import TransactionsList from './transactions/TransactionsList';
+import TransactionsList from './transactions/TransactionList';
 
 const tabList: { id: string; tab: ReactNode; Content: ElementType }[] = [
   { id: 'transactions', tab: 'Transactions', Content: TransactionsList },
