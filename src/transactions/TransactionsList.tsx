@@ -16,7 +16,11 @@ export default function TransactionsList() {
         />
       </Flex>
 
-      <AddTransactionModal isOpen={isOpen} onClose={onClose} />
+      <AddTransactionModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSuccess={onClose}
+      />
     </Box>
   );
 }

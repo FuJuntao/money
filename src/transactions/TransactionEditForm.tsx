@@ -4,6 +4,7 @@ import {
   NumberInput,
   NumberInputField,
   Select,
+  Textarea,
   VStack,
 } from '@chakra-ui/react';
 import { useLiveQuery } from 'dexie-react-hooks';
@@ -24,12 +25,14 @@ import type { TransactionType } from '../database/transactions/types';
 interface Values {
   accountId: string;
   amount: string;
+  remark: string;
   transactionType: TransactionType;
   transferToAccountId: string;
 }
 
 const transactionTypes: TransactionType[] = ['out', 'in', 'transfer'];
-const transactionTypeTitle: Record<TransactionType, string> = {
+
+export const transactionTypeTitle: Record<TransactionType, string> = {
   out: 'Expense',
   in: 'Income',
   transfer: 'Transfer',
@@ -107,20 +110,32 @@ function TransferToAccountField() {
   );
 }
 
+function RemarkField() {
+  return (
+    <FormikFormControl<Values['remark']> id="remark">
+      {(props) => <Textarea {...props} placeholder="Remark" />}
+    </FormikFormControl>
+  );
+}
+
+export interface InitialValues {
+  accountId?: ID;
+  amount?: number;
+  remark?: string;
+  transactionType?: TransactionType;
+  transferToAccountId?: ID;
+}
+
 export interface SubmitValues {
   accountId: ID;
   amount: number;
+  remark: string;
   transactionType: TransactionType;
   transferToAccountId?: ID;
 }
 
 interface TransactionEditFormProps {
-  initialValues?: {
-    accountId?: ID;
-    amount?: number;
-    transactionType?: TransactionType;
-    transferToAccountId?: ID;
-  };
+  initialValues?: InitialValues;
   renderActions?: (formik: FormikProps<Values>) => ReactNode;
   onSubmit: (values: SubmitValues) => void | Promise<void>;
 }
@@ -142,6 +157,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
     () => ({
       accountId: initialValuesProp?.accountId?.toString() ?? '',
       amount: initialValuesProp?.amount?.toString() ?? '',
+      remark: initialValuesProp?.remark ?? '',
       transactionType: initialValuesProp?.transactionType ?? 'out',
       transferToAccountId:
         initialValuesProp?.transferToAccountId?.toString() ?? '',
@@ -149,6 +165,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
     [
       initialValuesProp?.accountId,
       initialValuesProp?.amount,
+      initialValuesProp?.remark,
       initialValuesProp?.transactionType,
       initialValuesProp?.transferToAccountId,
     ],
@@ -157,6 +174,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
   const handleSubmit = async ({
     amount,
     accountId,
+    remark,
     transactionType,
     transferToAccountId,
   }: Values) =>
@@ -171,6 +189,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
             ),
           }
         : null),
+      remark,
     });
 
   const formik = useFormik<Values>({
@@ -189,6 +208,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
           <Collapse in={formik.values.transactionType === 'transfer'}>
             <TransferToAccountField />
           </Collapse>
+          <RemarkField />
         </ModalBody>
 
         {renderActions?.(formik)}
