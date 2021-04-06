@@ -7,9 +7,9 @@ export type Transaction = {
   amount: number;
   createdAt: Date;
   id?: ID;
+  oppositeAccountId?: ID;
   remark: string;
   transactionType: TransactionType;
-  transferToAccountId?: ID;
   updatedAt: Date;
 };
 

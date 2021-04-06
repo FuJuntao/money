@@ -25,9 +25,9 @@ import type { TransactionType } from '../database/transactions/types';
 interface Values {
   accountId: string;
   amount: string;
+  oppositeAccountId: string;
   remark: string;
   transactionType: TransactionType;
-  transferToAccountId: string;
 }
 
 const transactionTypes: TransactionType[] = ['out', 'in', 'transfer'];
@@ -96,7 +96,7 @@ function TransferToAccountField() {
   const accounts = useLiveQuery(getAccounts);
 
   return (
-    <FormikFormControl<Values['transferToAccountId']> id="transferToAccountId">
+    <FormikFormControl<Values['oppositeAccountId']> id="oppositeAccountId">
       {(props) => (
         <Select {...props} placeholder="Transfer to">
           {accounts?.map(({ id, name }) => (
@@ -121,17 +121,17 @@ function RemarkField() {
 export interface InitialValues {
   accountId?: ID;
   amount?: number;
+  oppositeAccountId?: ID;
   remark?: string;
   transactionType?: TransactionType;
-  transferToAccountId?: ID;
 }
 
 export interface SubmitValues {
   accountId: ID;
   amount: number;
+  oppositeAccountId?: ID;
   remark: string;
   transactionType: TransactionType;
-  transferToAccountId?: ID;
 }
 
 interface TransactionEditFormProps {
@@ -144,7 +144,7 @@ const validationSchema = yup.object({
   transactionType: yup.string().required(),
   amount: yup.number().label('Amount').required().moreThan(0).maxDigits(2),
   accountId: yup.string().label('Account').required(),
-  transferToAccountId: yup
+  oppositeAccountId: yup
     .string()
     .label('Transfer to')
     .when('transactionType', { is: 'transfer', then: yup.string().required() }),
@@ -157,26 +157,25 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
     () => ({
       accountId: initialValuesProp?.accountId?.toString() ?? '',
       amount: initialValuesProp?.amount?.toString() ?? '',
+      oppositeAccountId: initialValuesProp?.oppositeAccountId?.toString() ?? '',
       remark: initialValuesProp?.remark ?? '',
       transactionType: initialValuesProp?.transactionType ?? 'out',
-      transferToAccountId:
-        initialValuesProp?.transferToAccountId?.toString() ?? '',
     }),
     [
       initialValuesProp?.accountId,
       initialValuesProp?.amount,
+      initialValuesProp?.oppositeAccountId,
       initialValuesProp?.remark,
       initialValuesProp?.transactionType,
-      initialValuesProp?.transferToAccountId,
     ],
   );
 
   const handleSubmit = async ({
-    amount,
     accountId,
+    amount,
+    oppositeAccountId,
     remark,
     transactionType,
-    transferToAccountId,
   }: Values) =>
     onSubmit({
       transactionType,
@@ -184,9 +183,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
       accountId: Number.parseInt(accountId.toString()),
       ...(transactionType === 'transfer'
         ? {
-            transferToAccountId: Number.parseInt(
-              transferToAccountId.toString(),
-            ),
+            oppositeAccountId: Number.parseInt(oppositeAccountId.toString()),
           }
         : null),
       remark,

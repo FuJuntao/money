@@ -4,16 +4,16 @@ import type { TransactionType } from './types';
 interface AddTransactionInput {
   accountId: ID;
   amount: number;
+  oppositeAccountId?: ID;
   remark: string;
   transactionType: TransactionType;
-  transferToAccountId?: ID;
 }
 
 export function addTransaction(input: AddTransactionInput) {
   const {
     accountId,
     amount,
-    transferToAccountId,
+    oppositeAccountId,
     remark,
     transactionType,
   } = input;
@@ -27,7 +27,7 @@ export function addTransaction(input: AddTransactionInput) {
       accountId,
       amount,
       createdAt,
-      transferToAccountId,
+      oppositeAccountId,
       remark,
       transactionType,
       updatedAt,

@@ -35,9 +35,9 @@ function AddTransactionModalContent(props: AddTransactionModalContentProps) {
       const result = await mutate({
         accountId: values.accountId,
         amount: values.amount,
+        oppositeAccountId: values.oppositeAccountId,
         remark: values.remark,
         transactionType: values.transactionType,
-        transferToAccountId: values.transferToAccountId,
       });
 
       if (result) {
