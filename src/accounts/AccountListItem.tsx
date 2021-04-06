@@ -1,10 +1,8 @@
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import {
-  Badge,
-  Box,
   Button,
+  ButtonGroup,
   Flex,
-  Heading,
   IconButton,
   Popover,
   PopoverArrow,
@@ -12,13 +10,19 @@ import {
   PopoverContent,
   PopoverFooter,
   PopoverTrigger,
+  Stat,
+  StatLabel,
+  StatNumber,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import React from 'react';
+import { Decimal } from 'decimal.js';
+import { useLiveQuery } from 'dexie-react-hooks';
+import React, { useMemo } from 'react';
 import { deleteAccount } from '../database/accounts/deleteAccount';
 import type { AccountType, AccountWithID } from '../database/accounts/types';
-import type { ID } from '../database/MoneyDB';
+import { db, ID } from '../database/MoneyDB';
+import type { TransactionType } from '../database/transactions/types';
 import { useMutation } from '../hooks/useMutation';
 import UpdateAccountModal from './UpdateAccountModal';
 
@@ -51,7 +55,7 @@ function AccountDeleteIconButton(props: AccountDeleteIconButtonProps) {
     <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
       <PopoverTrigger>
         <IconButton
-          variant="ghost"
+          variant="outline"
           aria-label="Delete account"
           icon={<DeleteIcon />}
         />
@@ -82,7 +86,7 @@ function AccountUpdateIconButton(props: AccountUpdateIconButtonProps) {
   return (
     <>
       <IconButton
-        variant="ghost"
+        variant="outline"
         aria-label="Update account"
         icon={<EditIcon />}
         onClick={() => onOpen()}
@@ -98,25 +102,61 @@ function AccountUpdateIconButton(props: AccountUpdateIconButtonProps) {
   );
 }
 
+const getAmountWithSign = (amount: number, type: TransactionType) => {
+  switch (type) {
+    case 'in':
+      return amount;
+    case 'out':
+    case 'transfer':
+      return -amount;
+    default:
+      throw new Error('Unknown transaction type');
+  }
+};
+
 interface AccountListItemProps {
   account: AccountWithID;
 }
 
 export default function AccountListItem(props: AccountListItemProps) {
   const { account } = props;
-  const { name, type } = account;
+  const { id, name } = account;
+  const transactions = useLiveQuery(() =>
+    db.transactions
+      .filter(
+        ({ accountId, oppositeAccountId }) =>
+          accountId === id || oppositeAccountId === id,
+      )
+      .toArray(),
+  );
+
+  const balance = useMemo(
+    () =>
+      (
+        transactions?.reduce(
+          (prev, { transactionType, amount, oppositeAccountId }) => {
+            const amountWithSign = getAmountWithSign(amount, transactionType);
+            return prev.plus(
+              oppositeAccountId === id ? -amountWithSign : amountWithSign,
+            );
+          },
+          new Decimal(0),
+        ) ?? new Decimal(0)
+      ).toNumber(),
+    [id, transactions],
+  );
 
   return (
-    <Box>
-      <Flex alignItems="center">
-        <Heading as="h3">{name}</Heading>
+    <Flex alignItems="center">
+      <Stat>
+        <StatLabel>{name}</StatLabel>
+        <StatNumber>{balance}</StatNumber>
+      </Stat>
 
-        <Badge>{accountTypeTitle[type]}</Badge>
-
+      <ButtonGroup isAttached variant="outline" ml="auto">
         <AccountUpdateIconButton account={account} />
-
         <AccountDeleteIconButton id={account.id} />
-      </Flex>
-    </Box>
+      </ButtonGroup>
+    </Flex>
   );
 }
