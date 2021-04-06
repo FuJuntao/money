@@ -18,9 +18,10 @@ import {
 import React, { ReactNode, useMemo } from 'react';
 import * as yup from 'yup';
 import FormikFormControl from '../components/FormikFormControl';
-import { getAccounts } from '../database/accounts/getAccounts';
-import type { ID } from '../database/MoneyDB';
+import { db, ID } from '../database/MoneyDB';
 import type { TransactionType } from '../database/transactions/types';
+
+const getAccounts = () => db.accounts.toArray();
 
 interface Values {
   accountId: string;

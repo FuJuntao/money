@@ -10,13 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import React from 'react';
-import { getAccounts } from '../database/accounts/getAccounts';
+import { db } from '../database/MoneyDB';
 import AccountListItem from './AccountListItem';
 import CreateAccountModal from './CreateAccountModal';
 
 export default function AccountList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const accounts = useLiveQuery(getAccounts);
+  const accounts = useLiveQuery(() => db.accounts.orderBy('type').toArray());
 
   return (
     <Box>
