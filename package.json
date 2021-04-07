@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^1.4.2",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "dayjs": "^1.10.4",
     "decimal.js": "^10.2.1",
     "dexie": "^3.1.0-alpha.9",
     "dexie-react-hooks": "^1.0.6",

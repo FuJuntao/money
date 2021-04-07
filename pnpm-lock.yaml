@@ -22,6 +22,7 @@ specifiers:
   babel-eslint: ^10.1.0
   chai: npm:@esm-bundle/chai@^4.3.4
   chai-dom: ^1.9.0
+  dayjs: ^1.10.4
   decimal.js: ^10.2.1
   dexie: ^3.1.0-alpha.9
   dexie-react-hooks: ^1.0.6
@@ -49,6 +50,7 @@ dependencies:
   '@chakra-ui/react': 1.4.2_91d4b9ed41b15fbe03118aac6e7e01cf
   '@emotion/react': 11.1.5_@types+react@17.0.3+react@17.0.2
   '@emotion/styled': 11.1.5_a74314bbc21a27607eb4b82774331d24
+  dayjs: 1.10.4
   decimal.js: 10.2.1
   dexie: 3.1.0-alpha.9
   dexie-react-hooks: 1.0.6_8f3e5e519491419ed0739ddd7413e253
@@ -4012,6 +4014,10 @@ packages:
   /damerau-levenshtein/1.0.6:
     resolution: {integrity: sha512-JVrozIeElnj3QzfUIt8tB8YMluBJom4Vw9qTPpjGYQ9fYlB3D/rb6OordUxf3xeFB35LKWs0xqcO5U6ySvBtug==}
     dev: true
+
+  /dayjs/1.10.4:
+    resolution: {integrity: sha512-RI/Hh4kqRc1UKLOAf/T5zdMMX5DQIlDxwUe3wSyMMnEbGunnpENCdbUgM+dW7kXidZqCttBrmw7BhN4TMddkCw==}
+    dev: false
 
   /debounce/1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
