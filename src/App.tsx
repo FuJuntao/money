@@ -7,13 +7,13 @@ import {
   Tabs,
 } from '@chakra-ui/react';
 import React, { ElementType, ReactNode } from 'react';
-import AccountList from './accounts/AccountList';
+import AccountsIndexPage from './accounts/AccountsIndexPage';
 import { theme } from './theme';
 import TransactionsIndexPage from './transactions/TransactionsIndexPage';
 
 const tabList: { id: string; tab: ReactNode; Content: ElementType }[] = [
   { id: 'transactions', tab: 'Transactions', Content: TransactionsIndexPage },
-  { id: 'accounts', tab: 'Accounts', Content: AccountList },
+  { id: 'accounts', tab: 'Accounts', Content: AccountsIndexPage },
 ];
 
 function Homepage() {
