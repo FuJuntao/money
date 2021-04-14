@@ -19,7 +19,7 @@ const tabList: { id: string; tab: ReactNode; Content: ElementType }[] = [
 function Homepage() {
   return (
     <Tabs isLazy h="full" display="flex" flexDirection="column">
-      <TabPanels flex="1">
+      <TabPanels flex="1" overflowY="auto">
         {tabList.map(({ id, Content }) => (
           <TabPanel key={id}>
             <Content />
