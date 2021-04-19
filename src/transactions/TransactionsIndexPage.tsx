@@ -1,14 +1,22 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Flex, IconButton, Stack, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  IconButton,
+  Skeleton,
+  Stack,
+  StackDivider,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { useLiveQuery } from 'dexie-react-hooks';
 import React from 'react';
-import type { TransactionType } from '../database/transactions/types';
+import { db } from '../database/MoneyDB';
 import AddTransactionModal from './AddTransactionModal';
-import TransactionList from './TransactionList';
-
-const transactionTypes: TransactionType[] = ['out', 'in', 'transfer'];
+import TransactionListItem from './TransactionList';
 
 export default function TransactionsIndexPage() {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const transactions = useLiveQuery(() => db.transactions.toArray());
 
   return (
     <Box>
@@ -20,11 +28,16 @@ export default function TransactionsIndexPage() {
         />
       </Flex>
 
-      <Stack spacing={6}>
-        {transactionTypes.map((type) => (
-          <TransactionList key={type} type={type} />
-        ))}
-      </Stack>
+      <Skeleton isLoaded={!!transactions}>
+        <Stack divider={<StackDivider borderColor="gray.200" />}>
+          {transactions?.map((transaction) => (
+            <TransactionListItem
+              key={transaction.id}
+              transaction={transaction}
+            />
+          ))}
+        </Stack>
+      </Skeleton>
 
       <AddTransactionModal
         isOpen={isOpen}
