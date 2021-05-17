@@ -1,0 +1,15 @@
+name: Deploy to GitHub Pages
+
+on:
+ push:
+  branches:
+   - main 
+
+jobs:
+ depoly:
+  name: Deploy to GitHub Pages
+  runs-on: ubuntu-latest
+  steps:
+   - uses: crazy-max/ghaction-github-pages@v2.4.1
+     with: 
+       build_dir: ./build
