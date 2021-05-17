@@ -44,7 +44,7 @@ export class MoneyDB extends Dexie {
     super('money', options);
 
     this.version(1).stores({
-      accounts: '++id, &name, type',
+      accounts: '++id, &name',
       transactions:
         '++id, accountId, amount, createdAt, oppositeAccountId, remark, transactionType, updatedAt',
     });

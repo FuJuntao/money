@@ -10,7 +10,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import React from 'react';
-import type { AccountType, AccountWithID } from '../database/accounts/types';
+import type { AccountWithID } from '../database/accounts/types';
 import { updateAccount } from '../database/accounts/updateAccount';
 import { useMutation } from '../hooks/useMutation';
 import AccountEditForm, { Values } from './AccountEditForm';
@@ -26,12 +26,8 @@ function UpdateAccountModalContent(props: UpdateAccountModalContentProps) {
 
   const { mutate } = useMutation(updateAccount);
 
-  const onSubmit = async ({ name, type }: Values) => {
-    const result = await mutate({
-      id: account.id,
-      name,
-      type: type as AccountType,
-    });
+  const onSubmit = async ({ name }: Values) => {
+    const result = await mutate({ id: account.id, name });
     if (result) {
       toast({
         title: `Account '${result.name}' successfully updated`,

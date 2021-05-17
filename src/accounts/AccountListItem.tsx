@@ -20,17 +20,11 @@ import { Decimal } from 'decimal.js';
 import { useLiveQuery } from 'dexie-react-hooks';
 import React, { useMemo } from 'react';
 import { deleteAccount } from '../database/accounts/deleteAccount';
-import type { AccountType, AccountWithID } from '../database/accounts/types';
+import type { AccountWithID } from '../database/accounts/types';
 import { db, ID } from '../database/MoneyDB';
 import type { TransactionType } from '../database/transactions/types';
 import { useMutation } from '../hooks/useMutation';
 import UpdateAccountModal from './UpdateAccountModal';
-
-export const accountTypeTitle: Record<AccountType, string> = {
-  asset: 'Asset',
-  credit_card: 'Credit Card',
-  payment_account: 'Payment Account',
-};
 
 interface AccountDeleteIconButtonProps {
   id: ID;

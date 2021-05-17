@@ -12,7 +12,7 @@ import {
 import Dexie from 'dexie';
 import React from 'react';
 import { createAccount } from '../database/accounts/createAccount';
-import type { Account, AccountType } from '../database/accounts/types';
+import type { Account } from '../database/accounts/types';
 import { useMutation } from '../hooks/useMutation';
 import AccountEditForm, { Values } from './AccountEditForm';
 
@@ -27,9 +27,9 @@ function CreateAccountModalContent(props: CreateAccountModalContentProps) {
 
   const { mutate } = useMutation(createAccount);
 
-  const onSubmit = async ({ name, type }: Values) => {
+  const onSubmit = async ({ name }: Values) => {
     try {
-      const result = await mutate({ name, type: type as AccountType });
+      const result = await mutate({ name });
       if (result) {
         toast({
           title: `Account '${result.name}' successfully created`,

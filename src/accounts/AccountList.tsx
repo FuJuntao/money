@@ -1,28 +1,19 @@
-import { Box, Divider, Heading, Skeleton, Stack } from '@chakra-ui/react';
+import { Skeleton, Stack } from '@chakra-ui/react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import React from 'react';
-import type { AccountType } from '../database/accounts/types';
 import { db } from '../database/MoneyDB';
-import AccountListItem, { accountTypeTitle } from './AccountListItem';
+import AccountListItem from './AccountListItem';
 
-export default function AccountList(props: { type: AccountType }) {
-  const { type } = props;
-  const accounts = useLiveQuery(() =>
-    db.accounts.where('type').equals(type).toArray(),
-  );
+export default function AccountList() {
+  const accounts = useLiveQuery(() => db.accounts.toArray());
 
   return (
-    <Box key={type}>
-      <Heading as="h2">{accountTypeTitle[type]}</Heading>
-      <Divider />
-
-      <Skeleton isLoaded={!!accounts}>
-        <Stack>
-          {accounts?.map((account) => (
-            <AccountListItem key={account.id} account={account} />
-          ))}
-        </Stack>
-      </Skeleton>
-    </Box>
+    <Skeleton isLoaded={!!accounts}>
+      <Stack>
+        {accounts?.map((account) => (
+          <AccountListItem key={account.id} account={account} />
+        ))}
+      </Stack>
+    </Skeleton>
   );
 }
