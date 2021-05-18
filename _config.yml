@@ -1,1 +1,1 @@
-Include: ['_snowpack']
+include: ['_*']
