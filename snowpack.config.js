@@ -25,5 +25,6 @@ module.exports = {
 	},
 	buildOptions: {
 		sourcemap: 'inline',
+		metaUrlPath: 'snowpack',
 	},
 };
