@@ -1,4 +1,4 @@
-import Dexie from "../../snowpack/pkg/dexie.js";
+import Dexie from "../../_snowpack/pkg/dexie.js";
 export class MoneyDB extends Dexie {
   constructor(options) {
     super("money", options);

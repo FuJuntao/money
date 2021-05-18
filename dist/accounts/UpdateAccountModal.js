@@ -7,8 +7,8 @@ import {
   ModalHeader,
   ModalOverlay,
   useToast
-} from "../../snowpack/pkg/@chakra-ui/react.js";
-import React from "../../snowpack/pkg/react.js";
+} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import React from "../../_snowpack/pkg/react.js";
 import {updateAccount} from "../database/accounts/updateAccount.js";
 import {useMutation} from "../hooks/useMutation.js";
 import AccountEditForm from "./AccountEditForm.js";

@@ -1,4 +1,4 @@
-import {AddIcon} from "../../snowpack/pkg/@chakra-ui/icons.js";
+import {AddIcon} from "../../_snowpack/pkg/@chakra-ui/icons.js";
 import {
   Box,
   Flex,
@@ -7,9 +7,9 @@ import {
   Stack,
   StackDivider,
   useDisclosure
-} from "../../snowpack/pkg/@chakra-ui/react.js";
-import {useLiveQuery} from "../../snowpack/pkg/dexie-react-hooks.js";
-import React from "../../snowpack/pkg/react.js";
+} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import {useLiveQuery} from "../../_snowpack/pkg/dexie-react-hooks.js";
+import React from "../../_snowpack/pkg/react.js";
 import {db} from "../database/MoneyDB.js";
 import AddTransactionModal from "./AddTransactionModal.js";
 import TransactionListItem from "./TransactionList.js";

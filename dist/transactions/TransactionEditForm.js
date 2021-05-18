@@ -6,16 +6,16 @@ import {
   Select,
   Textarea,
   VStack
-} from "../../snowpack/pkg/@chakra-ui/react.js";
-import {useLiveQuery} from "../../snowpack/pkg/dexie-react-hooks.js";
+} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import {useLiveQuery} from "../../_snowpack/pkg/dexie-react-hooks.js";
 import {
   Form,
   FormikProvider,
   useFormik,
   useFormikContext
-} from "../../snowpack/pkg/formik.js";
-import React, {useMemo} from "../../snowpack/pkg/react.js";
-import * as yup from "../../snowpack/pkg/yup.js";
+} from "../../_snowpack/pkg/formik.js";
+import React, {useMemo} from "../../_snowpack/pkg/react.js";
+import * as yup from "../../_snowpack/pkg/yup.js";
 import FormikFormControl from "../components/FormikFormControl/index.js";
 import {db} from "../database/MoneyDB.js";
 const getAccounts = () => db.accounts.toArray();

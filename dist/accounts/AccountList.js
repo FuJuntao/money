@@ -1,6 +1,6 @@
-import {Box, Divider, Heading, Skeleton, Stack} from "../../snowpack/pkg/@chakra-ui/react.js";
-import {useLiveQuery} from "../../snowpack/pkg/dexie-react-hooks.js";
-import React from "../../snowpack/pkg/react.js";
+import {Box, Divider, Heading, Skeleton, Stack} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import {useLiveQuery} from "../../_snowpack/pkg/dexie-react-hooks.js";
+import React from "../../_snowpack/pkg/react.js";
 import {db} from "../database/MoneyDB.js";
 import AccountListItem, {accountTypeTitle} from "./AccountListItem.js";
 export default function AccountList(props) {

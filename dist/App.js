@@ -5,8 +5,8 @@ import {
   TabPanel,
   TabPanels,
   Tabs
-} from "../snowpack/pkg/@chakra-ui/react.js";
-import React from "../snowpack/pkg/react.js";
+} from "../_snowpack/pkg/@chakra-ui/react.js";
+import React from "../_snowpack/pkg/react.js";
 import AccountsIndexPage from "./accounts/AccountsIndexPage.js";
 import {theme} from "./theme.js";
 import TransactionsIndexPage from "./transactions/TransactionsIndexPage.js";

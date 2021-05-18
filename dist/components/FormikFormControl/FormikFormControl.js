@@ -2,9 +2,9 @@ import {
   Collapse,
   FormControl,
   FormErrorMessage
-} from "../../../snowpack/pkg/@chakra-ui/react.js";
-import {useField} from "../../../snowpack/pkg/formik.js";
-import React from "../../../snowpack/pkg/react.js";
+} from "../../../_snowpack/pkg/@chakra-ui/react.js";
+import {useField} from "../../../_snowpack/pkg/formik.js";
+import React from "../../../_snowpack/pkg/react.js";
 export default function FormikFormControl(props) {
   const {children, ...otherProps} = props;
   const [fieldInputProps, {touched, error}] = useField(props.id);

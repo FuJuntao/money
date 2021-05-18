@@ -1,4 +1,4 @@
-import * as yup from "../snowpack/pkg/yup.js";
+import * as yup from "../_snowpack/pkg/yup.js";
 function maxDigitsAfterDecimal(maxDigits, message) {
   return this.test("maxDigitsAfterDecimal", message ?? `\${path} must have ${maxDigits} digits or less after decimal`, (value = 0) => Number.isInteger(value * 10 ** maxDigits));
 }

@@ -1,4 +1,4 @@
-import {extendTheme} from "../snowpack/pkg/@chakra-ui/react.js";
+import {extendTheme} from "../_snowpack/pkg/@chakra-ui/react.js";
 export const theme = extendTheme({
   styles: {
     global: {

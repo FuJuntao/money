@@ -1,4 +1,4 @@
-import {DeleteIcon, EditIcon} from "../../snowpack/pkg/@chakra-ui/icons.js";
+import {DeleteIcon, EditIcon} from "../../_snowpack/pkg/@chakra-ui/icons.js";
 import {
   Button,
   ButtonGroup,
@@ -15,10 +15,10 @@ import {
   StatNumber,
   useDisclosure,
   useToast
-} from "../../snowpack/pkg/@chakra-ui/react.js";
-import {Decimal} from "../../snowpack/pkg/decimaljs.js";
-import {useLiveQuery} from "../../snowpack/pkg/dexie-react-hooks.js";
-import React, {useMemo} from "../../snowpack/pkg/react.js";
+} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import {Decimal} from "../../_snowpack/pkg/decimaljs.js";
+import {useLiveQuery} from "../../_snowpack/pkg/dexie-react-hooks.js";
+import React, {useMemo} from "../../_snowpack/pkg/react.js";
 import {deleteAccount} from "../database/accounts/deleteAccount.js";
 import {db} from "../database/MoneyDB.js";
 import {useMutation} from "../hooks/useMutation.js";

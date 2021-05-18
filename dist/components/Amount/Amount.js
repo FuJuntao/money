@@ -1,5 +1,5 @@
-import {chakra} from "../../../snowpack/pkg/@chakra-ui/react.js";
-import React, {forwardRef} from "../../../snowpack/pkg/react.js";
+import {chakra} from "../../../_snowpack/pkg/@chakra-ui/react.js";
+import React, {forwardRef} from "../../../_snowpack/pkg/react.js";
 const Amount = forwardRef((props, ref) => {
   const {children, currency, ...otherProps} = props;
   return /* @__PURE__ */ React.createElement(chakra.span, {

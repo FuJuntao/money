@@ -1,7 +1,7 @@
-import {Input, ModalBody, Select, VStack} from "../../snowpack/pkg/@chakra-ui/react.js";
-import {Form, FormikProvider, useFormik} from "../../snowpack/pkg/formik.js";
-import React, {useMemo} from "../../snowpack/pkg/react.js";
-import * as yup from "../../snowpack/pkg/yup.js";
+import {Input, ModalBody, Select, VStack} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import {Form, FormikProvider, useFormik} from "../../_snowpack/pkg/formik.js";
+import React, {useMemo} from "../../_snowpack/pkg/react.js";
+import * as yup from "../../_snowpack/pkg/yup.js";
 import FormikFormControl from "../components/FormikFormControl/index.js";
 import {accountTypeTitle} from "./AccountListItem.js";
 const accountTypes = ["payment_account", "credit_card", "asset"];

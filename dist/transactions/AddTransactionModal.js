@@ -7,9 +7,9 @@ import {
   ModalHeader,
   ModalOverlay,
   useToast
-} from "../../snowpack/pkg/@chakra-ui/react.js";
-import Dexie from "../../snowpack/pkg/dexie.js";
-import React from "../../snowpack/pkg/react.js";
+} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import Dexie from "../../_snowpack/pkg/dexie.js";
+import React from "../../_snowpack/pkg/react.js";
 import {addTransaction} from "../database/transactions/addTransaction.js";
 import {useMutation} from "../hooks/useMutation.js";
 import TransactionEditForm, {

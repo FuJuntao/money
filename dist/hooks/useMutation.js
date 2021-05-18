@@ -1,5 +1,5 @@
-import {useBoolean} from "../../snowpack/pkg/@chakra-ui/react.js";
-import {useCallback, useState} from "../../snowpack/pkg/react.js";
+import {useBoolean} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import {useCallback, useState} from "../../_snowpack/pkg/react.js";
 export const useMutation = (fn) => {
   const [isLoading, {on: setIsLoading, off: setIsNotLoading}] = useBoolean();
   const [error, setError] = useState(null);

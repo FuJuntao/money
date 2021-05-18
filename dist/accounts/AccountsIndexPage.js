@@ -1,4 +1,4 @@
-import {AddIcon} from "../../snowpack/pkg/@chakra-ui/icons.js";
+import {AddIcon} from "../../_snowpack/pkg/@chakra-ui/icons.js";
 import {
   Box,
   Divider,
@@ -6,8 +6,8 @@ import {
   IconButton,
   Stack,
   useDisclosure
-} from "../../snowpack/pkg/@chakra-ui/react.js";
-import React from "../../snowpack/pkg/react.js";
+} from "../../_snowpack/pkg/@chakra-ui/react.js";
+import React from "../../_snowpack/pkg/react.js";
 import AccountList from "./AccountList.js";
 import CreateAccountModal from "./CreateAccountModal.js";
 const accountTypes = ["payment_account", "credit_card", "asset"];
