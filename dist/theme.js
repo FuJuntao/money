@@ -1,4 +1,4 @@
-import {extendTheme} from "../_snowpack/pkg/@chakra-ui/react.js";
+import {extendTheme} from "../snowpack/pkg/@chakra-ui/react.js";
 export const theme = extendTheme({
   styles: {
     global: {
@@ -8,4 +8,4 @@ export const theme = extendTheme({
     }
   }
 });
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvbW9uZXkvbW9uZXkvc3JjL3RoZW1lLnRzIl0sCiAgIm1hcHBpbmdzIjogIkFBQUE7QUFFTyxhQUFNLFFBQVEsWUFBWTtBQUFBLEVBQy9CLFFBQVE7QUFBQSxJQUNOLFFBQVE7QUFBQSxNQUNOLE1BQU0sQ0FBRSxRQUFRO0FBQUEsTUFDaEIsTUFBTSxDQUFFLFFBQVE7QUFBQSxNQUNoQixTQUFTLENBQUUsUUFBUTtBQUFBO0FBQUE7QUFBQTsiLAogICJuYW1lcyI6IFtdCn0K
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiQzpcXHdvcmtzcGFjZVxcbW9uZXlcXHNyY1xcdGhlbWUudHMiXSwKICAibWFwcGluZ3MiOiAiQUFBQTtBQUVPLGFBQU0sUUFBUSxZQUFZO0FBQUEsRUFDL0IsUUFBUTtBQUFBLElBQ04sUUFBUTtBQUFBLE1BQ04sTUFBTSxDQUFFLFFBQVE7QUFBQSxNQUNoQixNQUFNLENBQUUsUUFBUTtBQUFBLE1BQ2hCLFNBQVMsQ0FBRSxRQUFRO0FBQUE7QUFBQTtBQUFBOyIsCiAgIm5hbWVzIjogW10KfQo=

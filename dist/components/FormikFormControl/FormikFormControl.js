@@ -2,9 +2,9 @@ import {
   Collapse,
   FormControl,
   FormErrorMessage
-} from "../../../_snowpack/pkg/@chakra-ui/react.js";
-import {useField} from "../../../_snowpack/pkg/formik.js";
-import React from "../../../_snowpack/pkg/react.js";
+} from "../../../snowpack/pkg/@chakra-ui/react.js";
+import {useField} from "../../../snowpack/pkg/formik.js";
+import React from "../../../snowpack/pkg/react.js";
 export default function FormikFormControl(props) {
   const {children, ...otherProps} = props;
   const [fieldInputProps, {touched, error}] = useField(props.id);
@@ -16,4 +16,4 @@ export default function FormikFormControl(props) {
     in: isInvalid
   }, /* @__PURE__ */ React.createElement(FormErrorMessage, null, error)));
 }
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvbW9uZXkvbW9uZXkvc3JjL2NvbXBvbmVudHMvRm9ybWlrRm9ybUNvbnRyb2wvRm9ybWlrRm9ybUNvbnRyb2wudHN4Il0sCiAgIm1hcHBpbmdzIjogIkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQU1BO0FBQ0E7QUFVQSwwQ0FDRSxPQUNBO0FBQ0EsUUFBTSxDQUFFLGFBQWEsY0FBZTtBQUVwQyxRQUFNLENBQUMsaUJBQWlCLENBQUUsU0FBUyxVQUFXLFNBQVMsTUFBTTtBQUM3RCxRQUFNLFlBQVksQ0FBQyxDQUFFLFlBQVc7QUFFaEMsU0FDRSxvQ0FBQyxhQUFEO0FBQUEsSUFBYTtBQUFBLE9BQTBCO0FBQUEsS0FDcEMsU0FBUyxrQkFFVixvQ0FBQyxVQUFEO0FBQUEsSUFBVSxJQUFJO0FBQUEsS0FDWixvQ0FBQyxrQkFBRCxNQUFtQjtBQUFBOyIsCiAgIm5hbWVzIjogW10KfQo=
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiQzpcXHdvcmtzcGFjZVxcbW9uZXlcXHNyY1xcY29tcG9uZW50c1xcRm9ybWlrRm9ybUNvbnRyb2xcXEZvcm1pa0Zvcm1Db250cm9sLnRzeCJdLAogICJtYXBwaW5ncyI6ICJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFNQTtBQUNBO0FBVUEsMENBQ0UsT0FDQTtBQUNBLFFBQU0sQ0FBRSxhQUFhLGNBQWU7QUFFcEMsUUFBTSxDQUFDLGlCQUFpQixDQUFFLFNBQVMsVUFBVyxTQUFTLE1BQU07QUFDN0QsUUFBTSxZQUFZLENBQUMsQ0FBRSxZQUFXO0FBRWhDLFNBQ0Usb0NBQUMsYUFBRDtBQUFBLElBQWE7QUFBQSxPQUEwQjtBQUFBLEtBQ3BDLFNBQVMsa0JBRVYsb0NBQUMsVUFBRDtBQUFBLElBQVUsSUFBSTtBQUFBLEtBQ1osb0NBQUMsa0JBQUQsTUFBbUI7QUFBQTsiLAogICJuYW1lcyI6IFtdCn0K
