@@ -1,0 +1,14 @@
+{
+  "imports": {
+    "@chakra-ui/icons": "./@chakra-ui/icons.js",
+    "@chakra-ui/react": "./@chakra-ui/react.js",
+    "dayjs": "./dayjs.js",
+    "decimal.js": "./decimaljs.js",
+    "dexie": "./dexie.js",
+    "dexie-react-hooks": "./dexie-react-hooks.js",
+    "formik": "./formik.js",
+    "react": "./react.js",
+    "react-dom": "./react-dom.js",
+    "yup": "./yup.js"
+  }
+}
