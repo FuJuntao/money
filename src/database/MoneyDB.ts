@@ -46,7 +46,8 @@ export class MoneyDB extends Dexie {
     this.version(1).stores({
       accounts: '++id, &name',
       transactions:
-        '++id, accountId, amount, createdAt, oppositeAccountId, remark, transactionType, updatedAt',
+        '++id, accountId, amount, createdAt, oppositeAccountId, remark, tagIds, transactionType, updatedAt',
+      tags: '++id, &name',
     });
 
     this.accounts = this.table('accounts') as TableWithAutoIncrementedID<

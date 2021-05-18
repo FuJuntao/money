@@ -9,6 +9,7 @@ export type Transaction = {
   id?: ID;
   oppositeAccountId?: ID;
   remark: string;
+  tagIds: ID[];
   transactionType: TransactionType;
   updatedAt: Date;
 };

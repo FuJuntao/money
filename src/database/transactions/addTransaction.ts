@@ -10,13 +10,8 @@ interface AddTransactionInput {
 }
 
 export function addTransaction(input: AddTransactionInput) {
-  const {
-    accountId,
-    amount,
-    oppositeAccountId,
-    remark,
-    transactionType,
-  } = input;
+  const { accountId, amount, oppositeAccountId, remark, transactionType } =
+    input;
   const createdAt = new Date();
   const updatedAt = new Date();
 
@@ -29,6 +24,8 @@ export function addTransaction(input: AddTransactionInput) {
       createdAt,
       oppositeAccountId,
       remark,
+      // TODO:
+      tagIds: [],
       transactionType,
       updatedAt,
     })
