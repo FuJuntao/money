@@ -4,13 +4,11 @@ import {
   Divider,
   Flex,
   IconButton,
-  Stack,
   useDisclosure
 } from "../../_snowpack/pkg/@chakra-ui/react.js";
 import React from "../../_snowpack/pkg/react.js";
 import AccountList from "./AccountList.js";
 import CreateAccountModal from "./CreateAccountModal.js";
-const accountTypes = ["payment_account", "credit_card", "asset"];
 export default function AccountsIndexPage() {
   const {isOpen, onOpen, onClose} = useDisclosure();
   return /* @__PURE__ */ React.createElement(Box, null, /* @__PURE__ */ React.createElement(Flex, {
@@ -21,15 +19,10 @@ export default function AccountsIndexPage() {
     icon: /* @__PURE__ */ React.createElement(AddIcon, null)
   })), /* @__PURE__ */ React.createElement(Divider, {
     my: "4"
-  }), /* @__PURE__ */ React.createElement(Stack, {
-    spacing: 10
-  }, accountTypes.map((type) => /* @__PURE__ */ React.createElement(AccountList, {
-    key: type,
-    type
-  }))), /* @__PURE__ */ React.createElement(CreateAccountModal, {
+  }), /* @__PURE__ */ React.createElement(AccountList, null), /* @__PURE__ */ React.createElement(CreateAccountModal, {
     isOpen,
     onClose,
     onSuccess: onClose
   }));
 }
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvbW9uZXkvbW9uZXkvc3JjL2FjY291bnRzL0FjY291bnRzSW5kZXhQYWdlLnRzeCJdLAogICJtYXBwaW5ncyI6ICJBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQVFBO0FBRUE7QUFDQTtBQUVBLE1BQU0sZUFBOEIsQ0FBQyxtQkFBbUIsZUFBZTtBQUV2RSw0Q0FBNEM7QUFDMUMsUUFBTSxDQUFFLFFBQVEsUUFBUSxXQUFZO0FBRXBDLFNBQ0Usb0NBQUMsS0FBRCxNQUNFLG9DQUFDLE1BQUQ7QUFBQSxJQUFNLGdCQUFlO0FBQUEsS0FDbkIsb0NBQUMsWUFBRDtBQUFBLElBQ0UsY0FBVztBQUFBLElBQ1gsU0FBUztBQUFBLElBQ1QsTUFBTSxvQ0FBQyxTQUFEO0FBQUEsT0FJVixvQ0FBQyxTQUFEO0FBQUEsSUFBUyxJQUFHO0FBQUEsTUFFWixvQ0FBQyxPQUFEO0FBQUEsSUFBTyxTQUFTO0FBQUEsS0FDYixhQUFhLElBQUksQ0FBQyxTQUNqQixvQ0FBQyxhQUFEO0FBQUEsSUFBYSxLQUFLO0FBQUEsSUFBTTtBQUFBLFFBSTVCLG9DQUFDLG9CQUFEO0FBQUEsSUFDRTtBQUFBLElBQ0E7QUFBQSxJQUNBLFdBQVc7QUFBQTtBQUFBOyIsCiAgIm5hbWVzIjogW10KfQo=
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvbW9uZXkvbW9uZXkvc3JjL2FjY291bnRzL0FjY291bnRzSW5kZXhQYWdlLnRzeCJdLAogICJtYXBwaW5ncyI6ICJBQUFBO0FBQ0E7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFPQTtBQUNBO0FBQ0E7QUFFQSw0Q0FBNEM7QUFDMUMsUUFBTSxDQUFFLFFBQVEsUUFBUSxXQUFZO0FBRXBDLFNBQ0Usb0NBQUMsS0FBRCxNQUNFLG9DQUFDLE1BQUQ7QUFBQSxJQUFNLGdCQUFlO0FBQUEsS0FDbkIsb0NBQUMsWUFBRDtBQUFBLElBQ0UsY0FBVztBQUFBLElBQ1gsU0FBUztBQUFBLElBQ1QsTUFBTSxvQ0FBQyxTQUFEO0FBQUEsT0FJVixvQ0FBQyxTQUFEO0FBQUEsSUFBUyxJQUFHO0FBQUEsTUFFWixvQ0FBQyxhQUFELE9BRUEsb0NBQUMsb0JBQUQ7QUFBQSxJQUNFO0FBQUEsSUFDQTtBQUFBLElBQ0EsV0FBVztBQUFBO0FBQUE7IiwKICAibmFtZXMiOiBbXQp9Cg==
