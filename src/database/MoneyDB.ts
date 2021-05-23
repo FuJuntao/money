@@ -5,6 +5,7 @@ import Dexie, {
   Table,
 } from 'dexie';
 import type { Account } from './accounts/types';
+import type { Tag } from './tags/types';
 import type { Transaction } from './transactions/types';
 
 export type ID = number;
@@ -39,6 +40,7 @@ interface TableWithAutoIncrementedID<T = unknown, TKey = ID>
 export class MoneyDB extends Dexie {
   accounts: TableWithAutoIncrementedID<Account, ID>;
   transactions: TableWithAutoIncrementedID<Transaction, ID>;
+  tags: TableWithAutoIncrementedID<Tag, ID>;
 
   constructor(options?: DexieOptions) {
     super('money', options);
@@ -57,6 +59,7 @@ export class MoneyDB extends Dexie {
     this.transactions = this.table(
       'transactions',
     ) as TableWithAutoIncrementedID<Transaction, ID>;
+    this.tags = this.table('tags') as TableWithAutoIncrementedID<Tag, ID>;
   }
 }
 

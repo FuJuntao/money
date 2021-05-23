@@ -28,6 +28,7 @@ interface Values {
   amount: string;
   oppositeAccountId: string;
   remark: string;
+  tagIds: string[];
   transactionType: TransactionType;
 }
 
@@ -111,6 +112,24 @@ function TransferToAccountField() {
   );
 }
 
+function TagsField() {
+  const tags = useLiveQuery(() => db.tags.toArray());
+
+  return (
+    <FormikFormControl<Values['tagIds']> id="tagIds">
+      {(props) => (
+        <Select multiple {...props} placeholder="Tags">
+          {tags?.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </Select>
+      )}
+    </FormikFormControl>
+  );
+}
+
 function RemarkField() {
   return (
     <FormikFormControl<Values['remark']> id="remark">
@@ -124,6 +143,7 @@ export interface InitialValues {
   amount?: number;
   oppositeAccountId?: ID;
   remark?: string;
+  tagIds: ID[];
   transactionType?: TransactionType;
 }
 
@@ -132,6 +152,7 @@ export interface SubmitValues {
   amount: number;
   oppositeAccountId?: ID;
   remark: string;
+  tagIds: ID[];
   transactionType: TransactionType;
 }
 
@@ -160,6 +181,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
       amount: initialValuesProp?.amount?.toString() ?? '',
       oppositeAccountId: initialValuesProp?.oppositeAccountId?.toString() ?? '',
       remark: initialValuesProp?.remark ?? '',
+      tagIds: initialValuesProp?.tagIds.map(String) ?? [],
       transactionType: initialValuesProp?.transactionType ?? 'out',
     }),
     [
@@ -167,6 +189,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
       initialValuesProp?.amount,
       initialValuesProp?.oppositeAccountId,
       initialValuesProp?.remark,
+      initialValuesProp?.tagIds,
       initialValuesProp?.transactionType,
     ],
   );
@@ -176,17 +199,19 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
     amount,
     oppositeAccountId,
     remark,
+    tagIds,
     transactionType,
   }: Values) =>
     onSubmit({
       transactionType,
       amount: Number.parseFloat(amount),
-      accountId: Number.parseInt(accountId.toString()),
+      accountId: Number.parseInt(accountId),
       ...(transactionType === 'transfer'
         ? {
             oppositeAccountId: Number.parseInt(oppositeAccountId.toString()),
           }
         : null),
+      tagIds: tagIds.filter((v) => v !== '').map(Number.parseInt),
       remark,
     });
 
@@ -206,6 +231,7 @@ export default function TransactionEditForm(props: TransactionEditFormProps) {
           <Collapse in={formik.values.transactionType === 'transfer'}>
             <TransferToAccountField />
           </Collapse>
+          <TagsField />
           <RemarkField />
         </ModalBody>
 
