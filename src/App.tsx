@@ -15,11 +15,14 @@ function Providers(props: { children: ReactNode }) {
 }
 
 function Routes() {
-  return useRoutes([
-    { path: '/', element: <TransactionsIndexPage /> },
-    { path: 'settings/*', element: <Settings /> },
-    { path: '*', element: <Page404 /> },
-  ]);
+  return useRoutes(
+    [
+      { path: '/', element: <TransactionsIndexPage /> },
+      { path: 'settings/*', element: <Settings /> },
+      { path: '*', element: <Page404 /> },
+    ],
+    import.meta.env.SNOWPACK_PUBLIC_BASE_URL,
+  );
 }
 
 function App() {
