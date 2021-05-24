@@ -19,7 +19,7 @@ jobs:
       - name: Build
         env:
           SNOWPACK_PUBLIC_BASE_URL: /${GITHUB_REPOSITORY#*/}
-        run: npm run-script build -- --base-url ${SNOWPACK_PUBLIC_BASE_URL}
+        run: SNOWPACK_PUBLIC_BASE_URL=${SNOWPACK_PUBLIC_BASE_URL} npm run-script build -- --base-url ${SNOWPACK_PUBLIC_BASE_URL}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
