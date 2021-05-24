@@ -1,48 +1,32 @@
-import {
-  ChakraProvider,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@chakra-ui/react';
-import React, { ElementType, ReactNode } from 'react';
-import AccountsIndexPage from './accounts/AccountsIndexPage';
-import TagsIndexPage from './tags/TagsIndexPage';
+import { ChakraProvider } from '@chakra-ui/react';
+import React, { ReactNode } from 'react';
+import { BrowserRouter, useRoutes } from 'react-router-dom';
+import Page404 from './pages/404';
+import Settings from './pages/Settings';
 import { theme } from './theme';
 import TransactionsIndexPage from './transactions/TransactionsIndexPage';
 
-const tabList: { id: string; tab: ReactNode; Content: ElementType }[] = [
-  { id: 'transactions', tab: 'Transactions', Content: TransactionsIndexPage },
-  { id: 'accounts', tab: 'Accounts', Content: AccountsIndexPage },
-  { id: 'tags', tab: 'Tags', Content: TagsIndexPage },
-];
-
-function Homepage() {
+function Providers(props: { children: ReactNode }) {
   return (
-    <Tabs isLazy h="full" display="flex" flexDirection="column">
-      <TabPanels flex="1" overflowY="auto">
-        {tabList.map(({ id, Content }) => (
-          <TabPanel key={id}>
-            <Content />
-          </TabPanel>
-        ))}
-      </TabPanels>
-
-      <TabList>
-        {tabList.map(({ id, tab }) => (
-          <Tab key={id}>{tab}</Tab>
-        ))}
-      </TabList>
-    </Tabs>
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>{props.children}</ChakraProvider>
+    </BrowserRouter>
   );
+}
+
+function Routes() {
+  return useRoutes([
+    { path: '/', element: <TransactionsIndexPage /> },
+    { path: 'settings/*', element: <Settings /> },
+    { path: '*', element: <Page404 /> },
+  ]);
 }
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Homepage />
-    </ChakraProvider>
+    <Providers>
+      <Routes />
+    </Providers>
   );
 }
 
