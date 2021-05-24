@@ -37,10 +37,12 @@ specifiers:
   eslint-plugin-react-hooks: ^4.2.0
   formik: ^2.2.8
   framer-motion: ^4.1.17
+  history: ^5.0.0
   mocha: ^8.4.0
   prettier: ^2.3.0
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-router-dom: ^6.0.0-beta.0
   snowpack: 3.5.1
   typescript: 4.2.4
   yup: ^0.32.9
@@ -56,8 +58,10 @@ dependencies:
   dexie-react-hooks: 1.0.6_f2d9a5f26213076d11641974819f54bf
   formik: 2.2.8_react@17.0.2
   framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
+  history: 5.0.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-router-dom: 6.0.0-beta.0_d9087d3b29103f1c99eb8571e6a2a0c4
   yup: 0.32.9
 
 devDependencies:
@@ -5352,6 +5356,12 @@ packages:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: false
 
+  /history/5.0.0:
+    resolution: {integrity: sha512-3NyRMKIiFSJmIPdq7FxkNMJkQ7ZEtVblOQ38VtKaA0zZMW1Eo6Q6W8oDKEflr1kNNTItSnk4JMCO1deeSgbLLg==}
+    dependencies:
+      '@babel/runtime': 7.14.0
+    dev: false
+
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
@@ -7310,6 +7320,31 @@ packages:
       tslib: 1.14.1
       use-callback-ref: 1.2.5_@types+react@17.0.6+react@17.0.2
       use-sidecar: 1.0.5_react@17.0.2
+    dev: false
+
+  /react-router-dom/6.0.0-beta.0_d9087d3b29103f1c99eb8571e6a2a0c4:
+    resolution: {integrity: sha512-36yNNGMT8RB9FRPL9nKJi6HKDkgOakU+o/2hHpSzR6e37gN70MpOU6QQlmif4oAWWBwjyGc3ZNOMFCsFuHUY5w==}
+    peerDependencies:
+      history: '>=5'
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      history: 5.0.0
+      prop-types: 15.7.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-router: 6.0.0-beta.0_history@5.0.0+react@17.0.2
+    dev: false
+
+  /react-router/6.0.0-beta.0_history@5.0.0+react@17.0.2:
+    resolution: {integrity: sha512-VgMdfpVcmFQki/LZuLh8E/MNACekDetz4xqft+a6fBZvvJnVqKbLqebF7hyoawGrV1HcO5tVaUang2Og4W2j1Q==}
+    peerDependencies:
+      history: '>=5'
+      react: '>=16.8'
+    dependencies:
+      history: 5.0.0
+      prop-types: 15.7.2
+      react: 17.0.2
     dev: false
 
   /react-style-singleton/2.1.1_@types+react@17.0.6+react@17.0.2:
