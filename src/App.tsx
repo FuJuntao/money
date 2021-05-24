@@ -14,7 +14,7 @@ function Providers(props: { children: ReactNode }) {
   );
 }
 
-function Routes() {
+function AllRoutes() {
   return useRoutes(
     [
       { path: '/', element: <TransactionsIndexPage /> },
@@ -25,10 +25,12 @@ function Routes() {
   );
 }
 
+console.log(import.meta.env);
+
 function App() {
   return (
     <Providers>
-      <Routes />
+      <AllRoutes />
     </Providers>
   );
 }
