@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 import { BrowserRouter, useRoutes } from 'react-router-dom';
 import Page404 from './pages/404';
-import Settings from './pages/Settings';
+import Settings from './pages/settings';
 import { theme } from './theme';
 import TransactionsIndexPage from './transactions/TransactionsIndexPage';
 
@@ -14,7 +14,7 @@ function Providers(props: { children: ReactNode }) {
   );
 }
 
-function AllRoutes() {
+function Routes() {
   return useRoutes(
     [
       { path: '/', element: <TransactionsIndexPage /> },
@@ -25,12 +25,10 @@ function AllRoutes() {
   );
 }
 
-console.log(import.meta.env);
-
 function App() {
   return (
     <Providers>
-      <AllRoutes />
+      <Routes />
     </Providers>
   );
 }

@@ -14,10 +14,10 @@ import {
 } from '@chakra-ui/react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import React from 'react';
-import { db } from '../database/MoneyDB';
-import CreateTagModal from './CreateTagModal';
+import { db } from '../../database/MoneyDB';
+import CreateTagModal from '../../tags/CreateTagModal';
 
-export default function TagsIndexPage() {
+export default function Tags() {
   const tags = useLiveQuery(() => db.tags.toArray());
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,8 +41,8 @@ export default function TagsIndexPage() {
 
       <Skeleton isLoaded={!!tags}>
         <Stack divider={<StackDivider borderColor="gray.200" />}>
-          {tags?.map((tag) => (
-            <Text>{tag.name}</Text>
+          {tags?.map(({ id, name }) => (
+            <Text key={id}>{name}</Text>
           ))}
         </Stack>
       </Skeleton>

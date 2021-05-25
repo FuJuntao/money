@@ -7,10 +7,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import AccountList from './AccountList';
-import CreateAccountModal from './CreateAccountModal';
+import AccountList from '../../accounts/AccountList';
+import CreateAccountModal from '../../accounts/CreateAccountModal';
 
-export default function AccountsIndexPage() {
+export default function Accounts() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
