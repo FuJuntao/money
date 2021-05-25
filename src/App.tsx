@@ -1,10 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
-import { BrowserRouter, useRoutes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Homepage from './pages';
 import Page404 from './pages/404';
-import Settings from './pages/settings';
 import { theme } from './theme';
-import TransactionsIndexPage from './transactions/TransactionsIndexPage';
 
 function Providers(props: { children: ReactNode }) {
   return (
@@ -14,21 +13,16 @@ function Providers(props: { children: ReactNode }) {
   );
 }
 
-function Routes() {
-  return useRoutes(
-    [
-      { path: '/', element: <TransactionsIndexPage /> },
-      { path: 'settings/*', element: <Settings /> },
-      { path: '*', element: <Page404 /> },
-    ],
-    import.meta.env.SNOWPACK_PUBLIC_BASE_URL,
-  );
-}
-
 function App() {
   return (
     <Providers>
-      <Routes />
+      <Routes>
+        <Route
+          path={`${import.meta.env.SNOWPACK_PUBLIC_BASE_URL ?? ''}/*`}
+          element={<Homepage />}
+        />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
     </Providers>
   );
 }

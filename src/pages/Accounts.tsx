@@ -7,8 +7,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import AccountList from '../../accounts/AccountList';
-import CreateAccountModal from '../../accounts/CreateAccountModal';
+import AccountList from '../accounts/AccountList';
+import CreateAccountModal from '../accounts/CreateAccountModal';
 
 export default function Accounts() {
   const { isOpen, onOpen, onClose } = useDisclosure();

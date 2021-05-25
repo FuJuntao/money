@@ -11,10 +11,10 @@ import {
 import { useLiveQuery } from 'dexie-react-hooks';
 import React from 'react';
 import { db } from '../database/MoneyDB';
-import AddTransactionModal from './AddTransactionModal';
-import TransactionListItem from './TransactionList';
+import AddTransactionModal from '../transactions/AddTransactionModal';
+import TransactionListItem from '../transactions/TransactionList';
 
-export default function TransactionsIndexPage() {
+export default function Transactions() {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const transactions = useLiveQuery(() => db.transactions.toArray());
 

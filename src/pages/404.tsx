@@ -1,11 +1,11 @@
-import { Text } from '@chakra-ui/react';
+import { Center, Heading } from '@chakra-ui/react';
 import React from 'react';
 
 function Page404() {
   return (
-    <div>
-      <Text>404</Text>
-    </div>
+    <Center h="full">
+      <Heading as="h1">404</Heading>
+    </Center>
   );
 }
 
