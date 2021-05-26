@@ -1,14 +1,16 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
-  Box,
   Breadcrumb as ChakraBreadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Flex,
   IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  StackDivider,
+  VStack,
 } from '@chakra-ui/react';
 import React from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
@@ -18,12 +20,9 @@ import Transactions from './Transactions';
 
 function Breadcrumb() {
   const { pathname } = useLocation();
-  const hasBaseUrl = !!import.meta.env.SNOWPACK_PUBLIC_BASE_URL;
-  const pathnameExcludeBaseUrl = hasBaseUrl
-    ? pathname.slice(
-        pathname.indexOf(import.meta.env.SNOWPACK_PUBLIC_BASE_URL) +
-          import.meta.env.SNOWPACK_PUBLIC_BASE_URL?.length,
-      )
+  const baseUrl = import.meta.env.SNOWPACK_PUBLIC_BASE_URL;
+  const pathnameExcludeBaseUrl = !!baseUrl
+    ? pathname.slice(pathname.indexOf(baseUrl) + (baseUrl?.length ?? 0))
     : pathname;
 
   return (
@@ -70,19 +69,36 @@ export default function Homepage() {
     </Menu>
   );
 
-  const location = useLocation();
-  console.log('file: index.tsx ~ line 46 ~ Homepage ~ location', location);
+  const header = (
+    <Flex
+      as="header"
+      px="2"
+      pt="2"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Breadcrumb />
+      {menu}
+    </Flex>
+  );
+
+  const routes = (
+    <Routes>
+      <Route path="/" element={<Transactions />} />
+      <Route path="accounts" element={<Accounts />} />
+      <Route path="tags" element={<Tags />} />
+    </Routes>
+  );
 
   return (
-    <Box>
-      {menu}
-      <Breadcrumb />
-
-      <Routes>
-        <Route path="/" element={<Transactions />} />
-        <Route path="accounts" element={<Accounts />} />
-        <Route path="tags" element={<Tags />} />
-      </Routes>
-    </Box>
+    <VStack
+      h="full"
+      divider={<StackDivider borderColor="gray.200" />}
+      spacing={2}
+      align="stretch"
+    >
+      {header}
+      {routes}
+    </VStack>
   );
 }
