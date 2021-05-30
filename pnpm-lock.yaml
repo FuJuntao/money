@@ -25,6 +25,7 @@ specifiers:
   dayjs: ^1.10.5
   decimal.js: ^10.2.1
   dexie: ^3.1.0-beta.11
+  dexie-export-import: ^1.0.0
   dexie-react-hooks: ^1.0.6
   eslint: ^7.27.0
   eslint-config-prettier: ^8.3.0
@@ -55,6 +56,7 @@ dependencies:
   dayjs: 1.10.5
   decimal.js: 10.2.1
   dexie: 3.1.0-beta.11
+  dexie-export-import: 1.0.0
   dexie-react-hooks: 1.0.6_9b9ad9107f30739aee57adb6346386a2
   formik: 2.2.8_react@17.0.2
   framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
@@ -4336,6 +4338,12 @@ packages:
     resolution: {integrity: sha512-xd4D8kHQtB0KtWW0c9xBZD5LVtm9chkMOfs/3Yn01RhT/sFIsVtzTtypfKoFfWBaL+7xCYLxjOLkhwPXaX/Kcg==}
     dev: true
 
+  /dexie-export-import/1.0.0:
+    resolution: {integrity: sha512-mqtREaI+/tSEfpwOZeYNyX+FfCxTYt0RB4BIevX4wFGMQL1mQ0cWfIGXBpoRGEnHdiHbf3QNK2+0Ras3dNJfIQ==}
+    dependencies:
+      dexie: 3.0.3
+    dev: false
+
   /dexie-react-hooks/1.0.6_9b9ad9107f30739aee57adb6346386a2:
     resolution: {integrity: sha512-OFoOBC4BQzkVGicuWl/cIMtlPp0wTAnUXwUJzq+l/zp0XVGmwEWkemRFq7JbudJLT0DINFVVzgVhGV7KOUK7uA==}
     peerDependencies:
@@ -4346,6 +4354,11 @@ packages:
       '@types/react': 17.0.8
       dexie: 3.1.0-beta.11
       react: 17.0.2
+    dev: false
+
+  /dexie/3.0.3:
+    resolution: {integrity: sha512-BSFhGpngnCl1DOr+8YNwBDobRMH0ziJs2vts69VilwetHYOtEDcLqo7d/XiIphM0tJZ2rPPyAGd31lgH2Ln3nw==}
+    engines: {node: '>=6.0'}
     dev: false
 
   /dexie/3.1.0-beta.11:

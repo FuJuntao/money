@@ -4,6 +4,7 @@ import Dexie, {
   PromiseExtended,
   Table,
 } from 'dexie';
+import 'dexie-export-import';
 import type { Account } from './accounts/types';
 import type { Tag } from './tags/types';
 import type { Transaction } from './transactions/types';

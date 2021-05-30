@@ -12,11 +12,14 @@ import {
   StackDivider,
   VStack,
 } from '@chakra-ui/react';
+import { exportDB } from 'dexie-export-import';
 import React from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { db } from '../database/MoneyDB';
 import Accounts from './Accounts';
 import Tags from './Tags';
 import Transactions from './Transactions';
+import dayjs from 'dayjs';
 
 function Breadcrumb() {
   const { pathname } = useLocation();
@@ -45,9 +48,30 @@ function Breadcrumb() {
   );
 }
 
+function downloadBlob(blob: Blob, filename: string = '') {
+  const anchor = document.createElement('a');
+  anchor.download = filename;
+  anchor.href = URL.createObjectURL(blob);
+  anchor.click();
+}
+
 const settingsMenuList = [
   { to: 'accounts', children: 'Accounts' },
   { to: 'tags', children: 'Tags' },
+];
+
+const dbOptionsMenuList = [
+  {
+    children: 'Import DB',
+  },
+  {
+    children: 'Export DB',
+    onClick: async () => {
+      // TODO:
+      const data = await exportDB(db);
+      downloadBlob(data, `moneyDB-v${db.verno}-${dayjs().valueOf()}.json`);
+    },
+  },
 ];
 
 export default function Homepage() {
@@ -62,6 +86,11 @@ export default function Homepage() {
       <MenuList>
         {settingsMenuList.map(({ to, children }) => (
           <MenuItem key={to} as={Link} to={to}>
+            {children}
+          </MenuItem>
+        ))}
+        {dbOptionsMenuList.map(({ onClick, children }) => (
+          <MenuItem key={children} onClick={onClick}>
             {children}
           </MenuItem>
         ))}
