@@ -8,18 +8,19 @@ import {
   Menu,
   MenuButton,
   MenuItem,
+  MenuItemProps,
   MenuList,
   StackDivider,
   VStack,
 } from '@chakra-ui/react';
-import { exportDB } from 'dexie-export-import';
+import dayjs from 'dayjs';
+import { exportDB, importInto } from 'dexie-export-import';
 import React from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { db } from '../database/MoneyDB';
 import Accounts from './Accounts';
 import Tags from './Tags';
 import Transactions from './Transactions';
-import dayjs from 'dayjs';
 
 function Breadcrumb() {
   const { pathname } = useLocation();
@@ -60,9 +61,25 @@ const settingsMenuList = [
   { to: 'tags', children: 'Tags' },
 ];
 
-const dbOptionsMenuList = [
+const dbOptionsMenuList: MenuItemProps[] = [
   {
-    children: 'Import DB',
+    children: (
+      <>
+        Import DB
+        <input
+          style={{ display: 'none' }}
+          type="file"
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              // TODO:
+              await importInto(db, file);
+            }
+          }}
+        />
+      </>
+    ),
+    as: 'label',
   },
   {
     children: 'Export DB',
@@ -89,10 +106,8 @@ export default function Homepage() {
             {children}
           </MenuItem>
         ))}
-        {dbOptionsMenuList.map(({ onClick, children }) => (
-          <MenuItem key={children} onClick={onClick}>
-            {children}
-          </MenuItem>
+        {dbOptionsMenuList.map((props, index) => (
+          <MenuItem key={index} {...props} />
         ))}
       </MenuList>
     </Menu>
