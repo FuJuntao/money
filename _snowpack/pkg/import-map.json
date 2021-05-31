@@ -5,6 +5,7 @@
     "dayjs": "./dayjs.js",
     "decimal.js": "./decimaljs.js",
     "dexie": "./dexie.js",
+    "dexie-export-import": "./dexie-export-import.js",
     "dexie-react-hooks": "./dexie-react-hooks.js",
     "formik": "./formik.js",
     "react": "./react.js",
