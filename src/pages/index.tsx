@@ -73,7 +73,8 @@ const dbOptionsMenuList: MenuItemProps[] = [
             const file = e.target.files?.[0];
             if (file) {
               // TODO:
-              await importInto(db, file);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              await importInto(db as any, file);
             }
           }}
         />
@@ -85,7 +86,8 @@ const dbOptionsMenuList: MenuItemProps[] = [
     children: 'Export DB',
     onClick: async () => {
       // TODO:
-      const data = await exportDB(db);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const data = await exportDB(db as any);
       downloadBlob(data, `moneyDB-v${db.verno}-${dayjs().valueOf()}.json`);
     },
   },
