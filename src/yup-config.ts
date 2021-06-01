@@ -13,3 +13,9 @@ function maxDigitsAfterDecimal(
 }
 
 yup.addMethod(yup.number, 'maxDigits', maxDigitsAfterDecimal);
+
+declare module 'yup' {
+  interface NumberSchema {
+    maxDigits: typeof maxDigitsAfterDecimal;
+  }
+}
