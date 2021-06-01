@@ -1,3 +1,4 @@
+import { Decimal } from 'decimal.js';
 import * as yup from 'yup';
 
 function maxDigitsAfterDecimal(
@@ -8,7 +9,7 @@ function maxDigitsAfterDecimal(
   return this.test(
     'maxDigitsAfterDecimal',
     message ?? `\${path} must have ${maxDigits} digits or less after decimal`,
-    (value = 0) => Number.isInteger(value * 10 ** maxDigits),
+    (value = 0) => new Decimal(value).dp() <= maxDigits,
   );
 }
 
