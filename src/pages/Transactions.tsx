@@ -16,7 +16,9 @@ import TransactionListItem from '../transactions/TransactionList';
 
 export default function Transactions() {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const transactions = useLiveQuery(() => db.transactions.toArray());
+  const transactions = useLiveQuery(() =>
+    db.transactions.toCollection().reverse().sortBy('createdAt'),
+  );
 
   return (
     <Box>
