@@ -1,5 +1,5 @@
 import { g as getDefaultExportFromNamespaceIfNotNamed, c as createCommonjsModule, a as commonjsGlobal } from './common/_commonjsHelpers-798ad6a7.js';
-import { d as dexie } from './common/dexie-fd9c87d0.js';
+import { d as dexie } from './common/dexie-79123666.js';
 import { r as react } from './common/index-404563d3.js';
 
 var require$$0 = /*@__PURE__*/getDefaultExportFromNamespaceIfNotNamed(dexie);
